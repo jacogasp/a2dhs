@@ -1,0 +1,92 @@
+name: Build
+on:
+  workflow_dispatch:
+  push:
+env:
+  BUILD_TYPE: Debug
+  ARCH: x64
+  LINUX_ARTIFACT: libCoreGame.so
+  MACOS_ARTIFACT: libCoreGame.dylib
+  WINDOWS_ARTIFACT: CoreGame.dll
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        config:
+#          - name: "Linux Latest x64"
+#            artifact: "libCoreGame.so"
+#            bundle_name: "Linux"
+#            arch: "x64"
+#            os: ubuntu-latest
+          - name: "macOS Latest x64"
+            artifact: "libCoreGame.dylib"
+            bundle_name: "macOS"
+            arch: "x64"
+            os: macos-latest
+          - name: "Windows Latest x64"
+            artifact: "CoreGame.dll"
+            bundle_name: "Windows"
+            arch: "x64"
+            os: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Install Deps
+        run: |
+          echo Install Deps
+      - name: Configure CMake
+        shell: bash
+        working-directory: CoreGame
+        run: |
+          mkdir -p dist/.cmake && cd dist/.cmake
+          cmake ../.. -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+      - name: Build
+        shell: bash
+        working-directory: CoreGame/dist/.cmake
+        run: |
+          cmake --build . -j8
+      - name: Prepare Artifacts
+        shell: bash
+        working-directory: CoreGame/dist
+        run: |
+          cd ${{ matrix.config.bundle_name }}/${{ matrix.config.arch }}/${{ env.BUILD_TYPE }}
+          mkdir ~/dist && mv ${{ matrix.config.artifact }} ~/dist
+          cd ~/dist && pwd && ls -la
+         
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.config.artifact }}
+          path: ~/dist/${{ matrix.config.artifact }}
+  commit:
+    name: "Push builds"
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # - uses: actions/download-artifact@v3
+      #  with:
+      #    name: ${{ env.LINUX_ARTIFACT }}
+      #    path: ${{ github.workspace }}/CoreGame/dist/Linux/${{ env.ARCH }}/${{ env.BUILD_TYPE }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.MACOS_ARTIFACT }}
+          path: ${{ github.workspace }}/CoreGame/dist/macOS/${{ env.ARCH }}/${{ env.BUILD_TYPE }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.WINDOWS_ARTIFACT }}
+          path: ${{ github.workspace }}/CoreGame/dist/Windows/${{ env.ARCH }}/${{ env.BUILD_TYPE }}
+      - name: "Commit build files"
+        run: |
+          git config --global user.name 'GitHub'
+          git config --global user.email 'github@users.noreply.github.com'
+          git pull
+          git add ${{ github.workspace }}/CoreGame/dist/
+          git commit -m "Automatic builds update"
+          git push
