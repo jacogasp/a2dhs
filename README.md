@@ -1,4 +1,4 @@
-# Godot Test with C++ and CMake
+# A 2D Horror Story
 
 Sources: 
 - [https://thatonegamedev.com/cpp/godot-native-using-cmake/](https://thatonegamedev.com/cpp/godot-native-using-cmake/)
