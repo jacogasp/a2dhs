@@ -2,6 +2,9 @@ name: Build
 on:
   workflow_dispatch:
   push:
+    paths:
+      - CoreGame/CoreGame/**
+      - .github/**
 env:
   BUILD_TYPE: Debug
   ARCH: x64
@@ -59,7 +62,7 @@ jobs:
           cd ${{ matrix.config.bundle_name }}/${{ matrix.config.arch }}/${{ env.BUILD_TYPE }}
           mkdir ~/dist && mv ${{ matrix.config.artifact }} ~/dist
           cd ~/dist && pwd && ls -la
-         
+
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.config.artifact }}
