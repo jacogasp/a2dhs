@@ -15,7 +15,7 @@ void Player::_register_methods() {
   godot::register_method("_on_VisibilityNotifier2D_screen_exited", &Player::_on_VisibilityNotifier2D_screen_exited);
 }
 
-void Player::_process(const double p_delta) {
+void Player::_process() {
   auto position = get_viewport()->get_mouse_position();
   set_position(position);
 }

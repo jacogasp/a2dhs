@@ -13,7 +13,7 @@
 #include <SpriteFrames.hpp>
 
 class Mob : public godot::RigidBody2D {
-  GODOT_CLASS(Mob, godot::RigidBody2D);
+  GODOT_CLASS(Mob, godot::RigidBody2D)
   godot::AnimatedSprite *_animatedSprite;
 
 public:

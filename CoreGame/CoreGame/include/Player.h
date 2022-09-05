@@ -25,7 +25,7 @@ public:
 
   void _init(){};
   void _ready();
-  void _process(const double p_delta);
+  void _process();
   void _on_VisibilityNotifier2D_screen_exited();
 };
 

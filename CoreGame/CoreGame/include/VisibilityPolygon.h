@@ -25,7 +25,7 @@ struct Edge {
 };
 
 class VisibilityPolygon : public godot::Polygon2D {
-  GODOT_CLASS(VisibilityPolygon, godot::Polygon2D);
+  GODOT_CLASS(VisibilityPolygon, godot::Polygon2D)
 
   const Player *m_player;
   godot::Vector2 screen_size;
