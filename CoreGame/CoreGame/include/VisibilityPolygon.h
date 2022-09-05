@@ -6,11 +6,12 @@
 #define A2DHS_VISIBILITYPOLYGON_H
 
 #include <Godot.hpp>
-#include <Polygon2D.hpp>
 #include <Gradient.hpp>
 #include <GradientTexture2D.hpp>
-#include <vector>
+#include <Polygon2D.hpp>
+#include <algorithm>
 #include <memory>
+#include <vector>
 
 #include "CoreMath.h"
 #include "Map.h"
