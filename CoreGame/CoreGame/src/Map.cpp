@@ -10,7 +10,7 @@ void Map::_ready() {
     m_walls.push_back(static_cast<godot::Polygon2D *>(walls[i]));
   }
   godot::String m {"Map ready: "};
-  m += godot::String(godot::Variant((int)m_walls.size()));
+  m += godot::String(std::to_string(m_walls.size()).c_str());
   m += " walls";
   godot::Godot::print(m);
 }

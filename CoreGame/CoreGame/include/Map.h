@@ -16,6 +16,7 @@
 #include <SceneTree.hpp>
 #include <Viewport.hpp>
 #include <vector>
+#include <string>
 
 class Map : public godot::Node {
   GODOT_CLASS(Map, godot::Node)

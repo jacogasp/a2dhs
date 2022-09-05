@@ -38,9 +38,9 @@ void VisibilityPolygon::_ready() {
 
 
   godot::String m{"VisibilityPolygon ready, walls: "};
-  m += godot::String(godot::Variant((int)m_walls.size()));
+  m += godot::String(std::to_string(m_walls.size()).c_str());
   m += godot::String(", vertices: ");
-  m += godot::String(godot::Variant((int)m_vertices.size()));
+  m += godot::String(std::to_string(m_vertices.size()).c_str());
   godot::Godot::print(m);
 }
 
