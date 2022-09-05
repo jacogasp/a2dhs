@@ -6,17 +6,16 @@
 #define COREGAME_PLAYER_H
 
 #include <AnimatedSprite.hpp>
-#include <Area2D.hpp>
 #include <CollisionShape2D.hpp>
 #include <Godot.hpp>
 #include <Input.hpp>
+#include <InputEvent.hpp>
+#include <InputEventMouse.hpp>
+#include <Node2D.hpp>
+#include <Viewport.hpp>
 
-class Player : public godot::Area2D {
-  GODOT_CLASS(Player, godot::Area2D)
-
-  godot::AnimatedSprite *_animated_sprite;
-  godot::CollisionShape2D *_collision_shape;
-  godot::Input *_input;
+class Player : public godot::Node2D {
+  GODOT_CLASS(Player, godot::Node2D)
   godot::Vector2 _screen_size;
 
 public:
@@ -25,10 +24,8 @@ public:
   static void _register_methods();
 
   void _init(){};
-  void start(godot::Vector2 position);
   void _ready();
   void _process(const double p_delta);
-  void _on_Player_body_entered(godot::Node2D *_body);
   void _on_VisibilityNotifier2D_screen_exited();
 };
 

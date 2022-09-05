@@ -1,8 +1,10 @@
 #include "Controller.h"
 #include "HUD.h"
 #include "Main.h"
+#include "Map.h"
 #include "Mob.h"
 #include "Player.h"
+#include "VisibilityPolygon.h"
 #include <Godot.hpp>
 
 using namespace godot;
@@ -20,4 +22,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
   register_class<Mob>();
   register_class<Main>();
   register_class<HUD>();
+  register_class<Map>();
+  register_class<VisibilityPolygon>();
 }
