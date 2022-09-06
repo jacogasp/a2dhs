@@ -7,6 +7,7 @@
 void VisibilityPolygon::_ready() {
   screen_size = get_viewport()->get_size();
 
+  // Add vertices at screen corners
   godot::Vector2 topLeft{0, 0};
   godot::Vector2 topRight{screen_size.width, 0};
   godot::Vector2 bottomRight{screen_size.width, screen_size.height};
@@ -14,6 +15,7 @@ void VisibilityPolygon::_ready() {
 
   m_vertices = {topLeft, topRight, bottomRight, bottomLeft};
 
+  // Add four edges around the screen for hit test
   Edge top{topLeft, topRight};
   Edge right{topRight, bottomRight};
   Edge bottom{bottomRight, bottomLeft};
@@ -24,18 +26,21 @@ void VisibilityPolygon::_ready() {
   m_edges.push_back(bottom);
   m_edges.push_back(left);
 
-  m_vertices.emplace_back(0.0f, 0.0f);
   for (auto &w : m_walls) {
     auto vertices = w->get_polygon();
     for (int i = 0; i < vertices.size(); ++i)
       m_vertices.push_back(vertices[i]);
   }
+  // We are going to draw N * 2 rays
   m_intersections.resize(m_vertices.size() * 2);
 
-  m_gradient = static_cast<godot::Ref<godot::Gradient>>(godot::Gradient::_new());
-  m_gradient->add_point(0, {0, 0, 0});
-  m_gradient->add_point(1, {255, 0, 0});
-
+  godot::Ref<godot::Shader> shader = godot::ResourceLoader::get_singleton()->load("res://Shaders/Gradient.gdshader");
+  auto mat = godot::ShaderMaterial::_new();
+  mat->set_shader(shader);
+  mat->set_shader_param("node_size", screen_size);
+  mat->set_shader_param("aspect_ratio", screen_size.y / screen_size.x);
+  mat->set_shader_param("fall_off", 2.5);
+  set_material(mat);
 
   godot::String m{"VisibilityPolygon ready, walls: "};
   m += godot::String(std::to_string(m_walls.size()).c_str());
@@ -45,6 +50,7 @@ void VisibilityPolygon::_ready() {
 }
 
 void VisibilityPolygon::_process() {
+  // For each vertex, hit test every polygon between the player and vertex.
   for (size_t i = 0; i < m_vertices.size(); i++) {
     auto &target = m_vertices[i];
     auto ray = target - m_player->get_position();
@@ -53,11 +59,11 @@ void VisibilityPolygon::_process() {
     const auto r2 = ray.rotated(-0.0001);
     const auto h1 = hitTest(r1);
     const auto h2 = hitTest(r2);
-
     m_intersections.at(2 * i) = h1;
     m_intersections.at(2 * i + 1) = h2;
   }
 
+  // Sort by angle respect to the player
   std::sort(m_intersections.begin(), m_intersections.end(), [&](godot::Vector2 const &a, godot::Vector2 const &b) {
     auto d_a = a - m_player->get_position();
     auto d_b = b - m_player->get_position();
@@ -65,20 +71,21 @@ void VisibilityPolygon::_process() {
     d_b.normalize();
     return d_a.angle() < d_b.angle();
   });
+
+  // Create the vertex pool
   godot::PoolVector2Array pool;
   pool.resize((int)m_intersections.size());
   for (int i = 0; i < pool.size(); ++i) {
     pool.set(i, m_intersections[i]);
   }
+
+  // Upload mouse normalized coordinates to shader
+  auto mouse = get_global_mouse_position();
+  mouse.x /= screen_size.x;
+  mouse.y /= screen_size.y;
+  godot::Ref<godot::ShaderMaterial> shader_material = get_material();
+  shader_material->set_shader_param("mouse_position", mouse);
   set_polygon(pool);
-  m_texture = static_cast<godot::Ref<godot::GradientTexture2D>>(godot::GradientTexture2D::_new());
-  m_texture->set_gradient(m_gradient);
-  m_texture->set_fill_from({1, 0});
-  m_texture->set_fill_to({0, 1.0});
-  m_texture->set_fill(1);
-  set_texture(m_texture);
-  show();
-  update();
 }
 
 godot::Vector2 VisibilityPolygon::hitTest(const godot::Vector2 &ray) {
@@ -95,23 +102,6 @@ godot::Vector2 VisibilityPolygon::hitTest(const godot::Vector2 &ray) {
   }
   return target;
 }
-
-void VisibilityPolygon::_draw() {
-  //  for (auto &poly : m_walls) {
-  //    auto vertices = poly->get_polygon();
-  //    for (int i = 0; i < vertices.size(); i += 1) {
-  //      draw_circle(vertices[i], 5, {255, 0, 0});
-  //      draw_line(m_player->get_position(), vertices[i], {255, 0, 0});
-  //    }
-  //  }
-
-  for (auto &p : m_intersections) {
-    draw_circle(p, 5, {0, 255, 0});
-    draw_line(m_player->get_position(), p, {0, 255, 0});
-  }
-}
-
-void VisibilityPolygon::add_wall(const godot::Polygon2D *wall) { m_walls.push_back(wall); }
 
 void VisibilityPolygon::set_walls(std::vector<const Polygon2D *> &walls) {
   m_walls = walls;
@@ -130,5 +120,4 @@ void VisibilityPolygon::set_player(const Player *player) { m_player = player; }
 void VisibilityPolygon::_register_methods() {
   godot::register_method("_ready", &VisibilityPolygon::_ready);
   godot::register_method("_process", &VisibilityPolygon::_process);
-  godot::register_method("_draw", &VisibilityPolygon::_draw);
 }

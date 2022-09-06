@@ -9,6 +9,12 @@
 #include <Gradient.hpp>
 #include <GradientTexture2D.hpp>
 #include <Polygon2D.hpp>
+#include <Material.hpp>
+#include <Shader.hpp>
+#include <ShaderMaterial.hpp>
+#include <ResourceLoader.hpp>
+#include <ImageTexture.hpp>
+#include <Texture.hpp>
 #include <algorithm>
 #include <memory>
 #include <string>
@@ -34,16 +40,11 @@ class VisibilityPolygon : public godot::Polygon2D {
   std::vector<Edge> m_edges{};
   std::vector<godot::Vector2> m_intersections;
 
-  godot::Ref<godot::Gradient> m_gradient;
-  godot::Ref<godot::GradientTexture2D> m_texture;
-
 public:
   void _init(){};
   void _ready();
-  void _draw();
   void _process();
   godot::Vector2 hitTest(godot::Vector2 const &ray);
-  void add_wall(const godot::Polygon2D *wall);
   void set_walls(std::vector<const Polygon2D *> &walls);
   void set_player(const Player *player);
   static void _register_methods();
