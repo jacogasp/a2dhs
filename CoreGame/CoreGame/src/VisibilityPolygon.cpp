@@ -45,7 +45,7 @@ void VisibilityPolygon::_ready() {
 }
 
 void VisibilityPolygon::_process() {
-  for (int i = 0; i < m_vertices.size(); i++) {
+  for (size_t i = 0; i < m_vertices.size(); i++) {
     auto &target = m_vertices[i];
     auto ray = target - m_player->get_position();
     ray = m_player->get_position() + ray.normalized() * 1000;

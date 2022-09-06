@@ -14,10 +14,6 @@ inline bool ccw(godot::Vector2 A, godot::Vector2 B, godot::Vector2 C) {
 }
 
 inline bool intersect(godot::Vector2 v1_0, godot::Vector2 v1_1, godot::Vector2 v2_0, godot::Vector2 v2_1) {
-  const auto &A = v1_0.x;
-  const auto &B = v1_1.y;
-  const auto &C = v2_0.x;
-  const auto &D = v2_1.y;
   return CoreGame::ccw(v1_0, v1_1, v2_0) != CoreGame::ccw(v1_0, v1_1, v2_1) &&
          CoreGame::ccw(v1_0, v2_0, v2_1) != CoreGame::ccw(v1_1, v2_0, v2_1);
 }

@@ -6,7 +6,6 @@ add_library(
         include/Controller.h src/Controller.cpp
         include/Player.h src/Player.cpp
         include/Enemy.h src/Enemy.cpp
-
         include/Mob.h src/Mob.cpp
         include/HUD.h src/HUD.cpp
         include/Main.h src/Main.cpp
@@ -21,6 +20,11 @@ set_target_properties(${targetname} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG "$
 set_target_properties(${targetname} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
 set_target_properties(${targetname} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${BUILD_DIR}")
 set_target_properties(${targetname} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
+target_compile_options(${targetname} PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall>
+        )
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 target_include_directories(
         ${targetname} PUBLIC
