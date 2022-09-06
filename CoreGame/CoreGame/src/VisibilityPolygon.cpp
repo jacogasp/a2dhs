@@ -24,7 +24,7 @@ void VisibilityPolygon::_ready() {
   m_edges.push_back(bottom);
   m_edges.push_back(left);
 
-  m_vertices.emplace_back(0, 0);
+  m_vertices.emplace_back(0.0f, 0.0f);
   for (auto &w : m_walls) {
     auto vertices = w->get_polygon();
     for (int i = 0; i < vertices.size(); ++i)
