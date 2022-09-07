@@ -20,7 +20,6 @@ float dist(vec2 p0, vec2 p1) {
 void fragment() {
 	vec2 uv = vert / node_size;
 	uv.y *= aspect_ratio;
-	//uv += offset;
 	float d = dist(mouse_position * vec2(1.0, aspect_ratio), uv) * fall_off;
 	
 	COLOR = vec4(uv, 1, 1);

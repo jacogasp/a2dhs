@@ -8,12 +8,10 @@
 #include <Godot.hpp>
 #include <Gradient.hpp>
 #include <GradientTexture2D.hpp>
-#include <Polygon2D.hpp>
 #include <Material.hpp>
+#include <Polygon2D.hpp>
 #include <Shader.hpp>
 #include <ShaderMaterial.hpp>
-#include <ResourceLoader.hpp>
-#include <ImageTexture.hpp>
 #include <Texture.hpp>
 #include <algorithm>
 #include <memory>
@@ -45,7 +43,7 @@ public:
   void _ready();
   void _process();
   godot::Vector2 hitTest(godot::Vector2 const &ray);
-  void set_walls(std::vector<const Polygon2D *> &walls);
+  void set_walls(std::vector<const godot::Polygon2D *> &walls);
   void set_player(const Player *player);
   static void _register_methods();
 };

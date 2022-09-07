@@ -34,14 +34,6 @@ void VisibilityPolygon::_ready() {
   // We are going to draw N * 2 rays
   m_intersections.resize(m_vertices.size() * 2);
 
-  godot::Ref<godot::Shader> shader = godot::ResourceLoader::get_singleton()->load("res://Shaders/Gradient.gdshader");
-  auto mat = godot::ShaderMaterial::_new();
-  mat->set_shader(shader);
-  mat->set_shader_param("node_size", screen_size);
-  mat->set_shader_param("aspect_ratio", screen_size.y / screen_size.x);
-  mat->set_shader_param("fall_off", 2.5);
-  set_material(mat);
-
   godot::String m{"VisibilityPolygon ready, walls: "};
   m += godot::String(std::to_string(m_walls.size()).c_str());
   m += godot::String(", vertices: ");
@@ -80,12 +72,13 @@ void VisibilityPolygon::_process() {
   }
 
   // Upload mouse normalized coordinates to shader
-  auto mouse = get_global_mouse_position();
-  mouse.x /= screen_size.x;
-  mouse.y /= screen_size.y;
+  auto playerPosition = m_player->get_position();
+  playerPosition.x /= screen_size.x;
+  playerPosition.y /= screen_size.y;
   godot::Ref<godot::ShaderMaterial> shader_material = get_material();
-  shader_material->set_shader_param("mouse_position", mouse);
+  shader_material->set_shader_param("mouse_position", playerPosition);
   set_polygon(pool);
+  update();
 }
 
 godot::Vector2 VisibilityPolygon::hitTest(const godot::Vector2 &ray) {
@@ -103,7 +96,7 @@ godot::Vector2 VisibilityPolygon::hitTest(const godot::Vector2 &ray) {
   return target;
 }
 
-void VisibilityPolygon::set_walls(std::vector<const Polygon2D *> &walls) {
+void VisibilityPolygon::set_walls(std::vector<const godot::Polygon2D *> &walls) {
   m_walls = walls;
   for (auto &w : m_walls) {
     auto vertices = w->get_polygon();
