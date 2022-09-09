@@ -34,17 +34,20 @@ void Main::_ready() {
 void Main::_process() {
   // Upload mouse normalized coordinates to shader
   auto playerPosition = m_player->get_position();
+  auto playerDirection = m_player->get_direction();
   playerPosition.x /= m_screen_size.x;
   playerPosition.y /= m_screen_size.y;
 
   godot::Ref<godot::ShaderMaterial> visibility_polygon_mat = m_visibility_polygon->get_material();
   visibility_polygon_mat->set_shader_param("light_position", playerPosition);
-  visibility_polygon_mat->set_shader_param("heading", m_player->get_velocity());
+  visibility_polygon_mat->set_shader_param("heading", playerDirection);
 
 
   godot::Ref<godot::ShaderMaterial> lightFilter_mat = m_lightFilter->get_material();
   lightFilter_mat->set_shader_param("light_position", playerPosition);
-  lightFilter_mat->set_shader_param("heading", m_player->get_velocity());
+  lightFilter_mat->set_shader_param("heading", playerDirection);
+
+//  godot::Godot::print(std::to_string(m_player->get_global_rotation()).c_str());
 }
 
 void Main::_register_methods() {
