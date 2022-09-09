@@ -7,6 +7,7 @@
 
 #include <Godot.hpp>
 #include <Vector2.hpp>
+#include <math.h>
 
 namespace CoreGame {
 inline bool ccw(godot::Vector2 A, godot::Vector2 B, godot::Vector2 C) {

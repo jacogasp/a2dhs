@@ -5,10 +5,10 @@
 #ifndef COREGAME_MAIN_H
 #define COREGAME_MAIN_H
 
-#include "LightFilter.h"
 #include "Map.h"
 #include "Player.h"
 #include "VisibilityPolygon.h"
+#include <ColorRect.hpp>
 #include <Godot.hpp>
 #include <Node.hpp>
 #include <PackedScene.hpp>
@@ -20,12 +20,14 @@ class Main : public godot::Node {
   Player *m_player;
   Map *m_map;
   VisibilityPolygon *m_visibility_polygon;
-  LightFilter *m_lightFilter;
-  float m_lightFalloff = 1.0f;
+  godot::ColorRect *m_lightFilter;
+  float m_lightFalloff = 5.0f;
+  godot::Vector2 m_screen_size;
 
 public:
   void _init() {}
   void _ready();
+  void _process();
   static void _register_methods();
 };
 

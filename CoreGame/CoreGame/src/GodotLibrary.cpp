@@ -1,6 +1,5 @@
 #include "Controller.h"
 #include "HUD.h"
-#include "LightFilter.h"
 #include "Main.h"
 #include "Map.h"
 #include "Mob.h"
@@ -25,5 +24,4 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
   register_class<HUD>();
   register_class<Map>();
   register_class<VisibilityPolygon>();
-  register_class<LightFilter>();
 }

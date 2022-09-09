@@ -13,6 +13,7 @@
 #include <InputEventMouse.hpp>
 #include <Node2D.hpp>
 #include <Viewport.hpp>
+#include "CoreMath.h"
 
 class Player : public godot::Node2D {
   GODOT_CLASS(Player, godot::Node2D)
@@ -20,9 +21,8 @@ class Player : public godot::Node2D {
   godot::Vector2 m_velocity;
   godot::Vector2 m_acceleration;
   godot::Vector2 m_prev_pos;
-  float m_heading = 0;
-  float maxSpeed = 15.0f;
-  float maxForce = 5.0f;
+  float maxSpeed = 5.0f;
+  float maxForce = 1.0f;
 
 public:
   real_t speed = 400;
@@ -31,9 +31,8 @@ public:
   void _init(){};
   void _ready();
   void _process();
-  void _draw();
   void applyForce(const godot::Vector2 &force);
-  [[nodiscard]] float get_heading() const;
+  [[nodiscard]] const godot::Vector2& get_velocity() const;
   void _on_VisibilityNotifier2D_screen_exited();
 };
 

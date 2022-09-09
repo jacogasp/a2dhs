@@ -71,12 +71,6 @@ void VisibilityPolygon::_process() {
     pool.set(i, m_intersections[i]);
   }
 
-  // Upload mouse normalized coordinates to shader
-  auto playerPosition = m_player->get_position();
-  playerPosition.x /= screen_size.x;
-  playerPosition.y /= screen_size.y;
-  godot::Ref<godot::ShaderMaterial> shader_material = get_material();
-  shader_material->set_shader_param("mouse_position", playerPosition);
   set_polygon(pool);
   update();
 }

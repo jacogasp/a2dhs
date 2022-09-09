@@ -11,7 +11,6 @@ add_library(
         include/Main.h src/Main.cpp
         include/Map.h src/Map.cpp
         include/VisibilityPolygon.h src/VisibilityPolygon.cpp
-        include/LightFilter.h src/LightFilter.cpp
 )
 
 target_link_libraries(CoreGame PUBLIC godot-cpp)
