@@ -30,7 +30,6 @@ void Main::_process() {
   godot::Ref<godot::ShaderMaterial> lightFilter_mat = m_lightFilter->get_material();
   lightFilter_mat->set_shader_param("light_position", playerPosition);
   lightFilter_mat->set_shader_param("heading", playerDirection);
-  //  godot::Godot::print(std::to_string(m_player->get_global_rotation()).c_str());
 }
 
 void Main::_register_methods() {

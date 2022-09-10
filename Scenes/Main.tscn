@@ -16,6 +16,7 @@ shader_param/half_vision_angle = 0.7854
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
+_lightFalloff = 4.0
 
 [node name="Map" parent="." instance=ExtResource( 3 )]
 
@@ -28,3 +29,4 @@ margin_bottom = 600.0
 position = Vector2( 512, 328 )
 
 [node name="VisibilityNode" parent="." instance=ExtResource( 4 )]
+_lightFalloff = 5.0

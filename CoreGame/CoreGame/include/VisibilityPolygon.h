@@ -38,6 +38,7 @@ class VisibilityPolygon : public godot::Node2D {
   std::vector<Edge> m_edges{};
   std::vector<godot::Vector2> m_intersections;
   godot::Polygon2D *m_visibilityPolygon{};
+  godot::Ref<godot::ShaderMaterial> m_material;
 
 public:
   float lightFalloff = 5.0f;
