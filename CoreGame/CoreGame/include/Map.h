@@ -10,7 +10,7 @@
 #include <Input.hpp>
 #include <InputEvent.hpp>
 #include <InputEventMouseButton.hpp>
-#include <Node.hpp>
+#include <Node2D.hpp>
 #include <Polygon2D.hpp>
 #include <PoolArrays.hpp>
 #include <SceneTree.hpp>
@@ -18,17 +18,14 @@
 #include <vector>
 #include <string>
 
-class Map : public godot::Node {
-  GODOT_CLASS(Map, godot::Node)
-  godot::Polygon2D *m_new_polygon;
-  godot::Array _walls;
+class Map : public godot::Node2D {
+  GODOT_CLASS(Map, godot::Node2D)
   std::vector<const godot::Polygon2D *> m_walls;
 
 public:
   void _init() {}
   void _ready();
   void _process();
-  void _input(godot::InputEvent *inputEvent);
   [[nodiscard]] std::vector<const godot::Polygon2D *>& get_walls();
   static void _register_methods();
 };

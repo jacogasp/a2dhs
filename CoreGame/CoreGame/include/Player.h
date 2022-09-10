@@ -22,7 +22,7 @@ class Player : public godot::KinematicBody2D {
   godot::Vector2 m_acceleration;
 
 public:
-  real_t speed = 200;
+  real_t speed = 200.0f;
   static void _register_methods();
 
   void _init(){};

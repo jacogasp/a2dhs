@@ -5,13 +5,14 @@
 #include "VisibilityPolygon.h"
 
 void VisibilityPolygon::_ready() {
-  screen_size = get_viewport()->get_size();
+  m_visibilityPolygon = get_node<godot::Polygon2D>("VisibilityPolygon");
+  m_screen_size = get_viewport_rect().get_size();
 
   // Add vertices at screen corners
   godot::Vector2 topLeft{0, 0};
-  godot::Vector2 topRight{screen_size.width, 0};
-  godot::Vector2 bottomRight{screen_size.width, screen_size.height};
-  godot::Vector2 bottomLeft{0, screen_size.height};
+  godot::Vector2 topRight{m_screen_size.width, 0};
+  godot::Vector2 bottomRight{m_screen_size.width, m_screen_size.height};
+  godot::Vector2 bottomLeft{0, m_screen_size.height};
 
   m_vertices = {topLeft, topRight, bottomRight, bottomLeft};
 
@@ -26,19 +27,12 @@ void VisibilityPolygon::_ready() {
   m_edges.push_back(bottom);
   m_edges.push_back(left);
 
-  for (auto &w : m_walls) {
-    auto vertices = w->get_polygon();
-    for (int i = 0; i < vertices.size(); ++i)
-      m_vertices.push_back(vertices[i]);
-  }
-  // We are going to draw N * 2 rays
-  m_intersections.resize(m_vertices.size() * 2);
+  godot::Ref<godot::ShaderMaterial> mat = m_visibilityPolygon->get_material();
+  mat->set_shader_param("node_size", m_screen_size);
+  mat->set_shader_param("aspect_ratio", m_screen_size.y / m_screen_size.x);
+  mat->set_shader_param("fall_off", lightFalloff);
 
-  godot::String m{"VisibilityPolygon ready, walls: "};
-  m += godot::String(std::to_string(m_walls.size()).c_str());
-  m += godot::String(", vertices: ");
-  m += godot::String(std::to_string(m_vertices.size()).c_str());
-  godot::Godot::print(m);
+  godot::Godot::print("VisibilityPolygon ready");
 }
 
 void VisibilityPolygon::_process() {
@@ -70,8 +64,16 @@ void VisibilityPolygon::_process() {
   for (int i = 0; i < pool.size(); ++i) {
     pool.set(i, m_intersections[i]);
   }
+  m_visibilityPolygon->set_polygon(pool);
 
-  set_polygon(pool);
+  // Set shader rotation
+  auto playerPosition = m_player->get_position();
+  auto playerDirection = m_player->get_direction();
+  playerPosition.x /= m_screen_size.x;
+  playerPosition.y /= m_screen_size.y;
+  godot::Ref<godot::ShaderMaterial> visibility_polygon_mat = m_visibilityPolygon->get_material();
+  visibility_polygon_mat->set_shader_param("light_position", playerPosition);
+  visibility_polygon_mat->set_shader_param("heading", playerDirection);
   update();
 }
 
@@ -100,11 +102,22 @@ void VisibilityPolygon::set_walls(std::vector<const godot::Polygon2D *> &walls) 
       m_edges.emplace_back(vertices[i + 1], vertices[i]);
     }
   }
+
+  for (auto &w : m_walls) {
+    auto vertices = w->get_polygon();
+    for (int i = 0; i < vertices.size(); ++i)
+      m_vertices.push_back(vertices[i]);
+  }
+
+  m_intersections.resize(m_vertices.size() * 2);
 }
 
 void VisibilityPolygon::set_player(const Player *player) { m_player = player; }
 
+void VisibilityPolygon::set_light_falloff(const float f) { lightFalloff = f; }
+
 void VisibilityPolygon::_register_methods() {
   godot::register_method("_ready", &VisibilityPolygon::_ready);
   godot::register_method("_process", &VisibilityPolygon::_process);
+  godot::register_property("_lightFalloff", &VisibilityPolygon::lightFalloff, 1.0f);
 }

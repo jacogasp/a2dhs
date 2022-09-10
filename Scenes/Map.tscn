@@ -2,21 +2,21 @@
 
 [ext_resource path="res://Scripts/Map.gdns" type="Script" id=1]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Polygon2D" type="Polygon2D" parent="." groups=["walls"]]
+[node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color( 0.231373, 0.67451, 0.486275, 1 )
 antialiased = true
 polygon = PoolVector2Array( 70, 202, 75, 269, 203, 254, 203, 154, 203, 154 )
 uv = PoolVector2Array( 70, 202, 75, 269, 203, 254, 203, 154, 203, 154 )
 
-[node name="Polygon2D2" type="Polygon2D" parent="." groups=["walls"]]
+[node name="Polygon2D2" type="Polygon2D" parent="."]
 color = Color( 0.231373, 0.67451, 0.486275, 1 )
 antialiased = true
 polygon = PoolVector2Array( 877, 153, 825, 264, 692, 265, 693, 358, 613, 358, 618, 401, 743, 402, 743, 308, 852, 300, 911, 166 )
 
-[node name="Polygon2D3" type="Polygon2D" parent="." groups=["walls"]]
+[node name="Polygon2D3" type="Polygon2D" parent="."]
 color = Color( 0.231373, 0.67451, 0.486275, 1 )
 antialiased = true
 polygon = PoolVector2Array( 328, 456, 323, 67, 637, 70, 637, 104, 350, 103, 354, 424, 393, 425, 389, 172, 427, 172, 430, 453 )

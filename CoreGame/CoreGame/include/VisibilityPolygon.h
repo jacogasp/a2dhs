@@ -28,23 +28,27 @@ struct Edge {
   Edge(const godot::Vector2 &_a, const godot::Vector2 &_b) : a(_a), b(_b) {}
 };
 
-class VisibilityPolygon : public godot::Polygon2D {
-  GODOT_CLASS(VisibilityPolygon, godot::Polygon2D)
+class VisibilityPolygon : public godot::Node2D {
+  GODOT_CLASS(VisibilityPolygon, godot::Node2D)
 
   const Player *m_player;
-  godot::Vector2 screen_size;
-  std::vector<const Polygon2D *> m_walls{};
+  godot::Vector2 m_screen_size;
+  std::vector<const godot::Polygon2D *> m_walls{};
   std::vector<godot::Vector2> m_vertices{};
   std::vector<Edge> m_edges{};
   std::vector<godot::Vector2> m_intersections;
+  godot::Polygon2D *m_visibilityPolygon{};
 
 public:
+  float lightFalloff = 5.0f;
+
   void _init(){};
   void _ready();
   void _process();
   godot::Vector2 hitTest(godot::Vector2 const &ray);
   void set_walls(std::vector<const godot::Polygon2D *> &walls);
   void set_player(const Player *player);
+  void set_light_falloff(float f);
   static void _register_methods();
 };
 

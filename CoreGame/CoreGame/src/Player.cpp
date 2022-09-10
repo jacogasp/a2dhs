@@ -23,7 +23,10 @@ void Player::_process(const real_t p_delta) {
   update();
 }
 
-void Player::_on_VisibilityNotifier2D_screen_exited() { queue_free(); }
+void Player::_on_VisibilityNotifier2D_screen_exited() {
+  godot::Godot::print("Player disappears");
+  queue_free();
+}
 
 godot::Vector2 Player::get_direction() const {
   godot::Vector2 v{};
