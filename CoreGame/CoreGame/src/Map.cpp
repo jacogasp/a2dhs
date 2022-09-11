@@ -6,8 +6,15 @@
 
 void Map::_ready() {
   auto walls = get_children();
+
   for (int i = 0; i < walls.size(); ++i) {
-    m_walls.push_back(static_cast<godot::Polygon2D *>(walls[i]));
+    auto wall = static_cast<godot::Polygon2D *>(walls[i]);
+    auto collisionPolygon2D = godot::CollisionPolygon2D::_new();
+    collisionPolygon2D->set_polygon(wall->get_polygon());
+    auto staticBody = godot::StaticBody2D::_new();
+    staticBody->add_child(collisionPolygon2D);
+    add_child(staticBody);
+    m_walls.push_back(wall);
   }
   godot::String m {"Map ready: "};
   m += godot::String(std::to_string(m_walls.size()).c_str());

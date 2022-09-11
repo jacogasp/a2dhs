@@ -27,7 +27,8 @@ public:
 
   void _init(){};
   void _ready();
-  void _process(real_t p_delta);
+  void _physics_process(real_t p_delta);
+//  void _process(real_t p_delta);
   [[nodiscard]] godot::Vector2 get_direction() const;
   void _on_VisibilityNotifier2D_screen_exited();
 };

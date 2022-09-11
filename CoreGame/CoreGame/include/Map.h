@@ -5,18 +5,17 @@
 #ifndef A2DHS_MAP_H
 #define A2DHS_MAP_H
 
+#include <Area2D.hpp>
 #include <Array.hpp>
+#include <CollisionPolygon2D.hpp>
 #include <Godot.hpp>
 #include <Input.hpp>
-#include <InputEvent.hpp>
-#include <InputEventMouseButton.hpp>
 #include <Node2D.hpp>
 #include <Polygon2D.hpp>
 #include <PoolArrays.hpp>
-#include <SceneTree.hpp>
-#include <Viewport.hpp>
-#include <vector>
+#include <StaticBody2D.hpp>
 #include <string>
+#include <vector>
 
 class Map : public godot::Node2D {
   GODOT_CLASS(Map, godot::Node2D)
@@ -26,7 +25,7 @@ public:
   void _init() {}
   void _ready();
   void _process();
-  [[nodiscard]] std::vector<const godot::Polygon2D *>& get_walls();
+  [[nodiscard]] std::vector<const godot::Polygon2D *> &get_walls();
   static void _register_methods();
 };
 
