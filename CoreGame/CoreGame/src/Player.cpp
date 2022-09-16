@@ -21,7 +21,7 @@ void Player::_physics_process(const real_t p_delta) {
 
   if (velocity.length() > 0.0f) {
     float angle = velocity.angle();
-    set_global_rotation(godot::Math::lerp_angle(get_global_rotation(), angle, 0.1f));
+    set_global_rotation(godot::Math::lerp_angle(get_global_rotation(), angle, rotation_weight));
   }
   update();
 }
@@ -39,6 +39,7 @@ godot::Vector2 Player::get_direction() const {
 
 void Player::_register_methods() {
   godot::register_property("speed", &Player::speed, (real_t)200.0f);
+  godot::register_property("rotation_weight", &Player::rotation_weight, (real_t)0.5f);
   godot::register_method("_ready", &Player::_ready);
   godot::register_method("_physics_process", &Player::_physics_process);
   godot::register_method("_on_VisibilityNotifier2D_screen_exited", &Player::_on_VisibilityNotifier2D_screen_exited);

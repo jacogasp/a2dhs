@@ -23,6 +23,7 @@ class Player : public godot::KinematicBody2D {
 
 public:
   real_t speed = 200.0f;
+  real_t rotation_weight = 0.5f;
   static void _register_methods();
 
   void _init(){};
