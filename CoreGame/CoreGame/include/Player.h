@@ -20,6 +20,7 @@ class Player : public godot::KinematicBody2D {
   GODOT_CLASS(Player, godot::KinematicBody2D)
   godot::Vector2 m_velocity;
   godot::Vector2 m_acceleration;
+  godot::AnimatedSprite *m_animatedSprite;
 
 public:
   real_t speed = 200.0f;

@@ -10,6 +10,7 @@ add_library(
         include/HUD.h src/HUD.cpp
         include/Main.h src/Main.cpp
         include/Map.h src/Map.cpp
+        include/CoreMath.h
         include/VisibilityPolygon.h src/VisibilityPolygon.cpp
 )
 
@@ -32,3 +33,6 @@ target_include_directories(
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
+
+export(TARGETS ${targetname} godot-cpp NAMESPACE CoreGame:: FILE /usr/local/lib/CoreGameConfig.cmake)
+install(TARGETS ${targetname} godot-cpp)

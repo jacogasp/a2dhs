@@ -5,7 +5,11 @@
 #include <algorithm>
 #include <iostream>
 
-void Player::_ready() { godot::Godot::print("Player ready"); }
+void Player::_ready() { 
+  m_animatedSprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
+  m_animatedSprite->set_animation("walk");
+  godot::Godot::print("Player ready"); 
+  }
 
 std::ostream &operator<<(std::ostream &os, const godot::Vector2 &v) { return os << "x: " << v.x << ", y: " << v.y; }
 
@@ -21,7 +25,10 @@ void Player::_physics_process(const real_t p_delta) {
 
   if (velocity.length() > 0.0f) {
     float angle = velocity.angle();
+    m_animatedSprite->play();
     set_global_rotation(godot::Math::lerp_angle(get_global_rotation(), angle, rotation_weight));
+  } else {
+    m_animatedSprite->stop();
   }
   update();
 }
