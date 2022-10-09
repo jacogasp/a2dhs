@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "Mob.h"
 #include "Player.h"
+#include "Torch.h"
 #include "VisibilityPolygon.h"
 #include <Godot.hpp>
 
@@ -24,4 +25,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
   register_class<HUD>();
   register_class<Map>();
   register_class<VisibilityPolygon>();
+  register_class<Torch>();
 }

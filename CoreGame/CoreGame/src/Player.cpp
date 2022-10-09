@@ -20,8 +20,8 @@ void Player::_physics_process(const real_t p_delta) {
   velocity.y = input->get_action_strength("move_down") - input->get_action_strength("move_up");
   float inputMagnitude = std::clamp(velocity.length(), 0.0f, 1.0f);
   auto collision = move_and_collide(velocity * speed * inputMagnitude * p_delta);
-  if (collision != nullptr)
-      godot::Godot::print("collided!");
+//  if (collision != nullptr)
+//      godot::Godot::print("collided!");
 
   if (velocity.length() > 0.0f) {
     float angle = velocity.angle();

@@ -10,6 +10,7 @@ add_library(
         include/HUD.h src/HUD.cpp
         include/Main.h src/Main.cpp
         include/Map.h src/Map.cpp
+        include/Torch.h src/Torch.cpp
         include/CoreMath.h
         include/VisibilityPolygon.h src/VisibilityPolygon.cpp
 )
