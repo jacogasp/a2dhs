@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Main.gdns" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/old/Map.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/VisibilityPolygon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/LightFilter.gdshader" type="Shader" id=5]
 
