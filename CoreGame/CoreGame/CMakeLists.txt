@@ -16,16 +16,19 @@ add_library(
 )
 
 target_link_libraries(CoreGame PUBLIC godot-cpp)
+set(COMPILE_OPTIONS )
 
 message(STATUS "Build dir: ${BUILD_DIR}")
 set_target_properties(${targetname} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG "${BUILD_DIR}")
 set_target_properties(${targetname} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
 set_target_properties(${targetname} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${BUILD_DIR}")
 set_target_properties(${targetname} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
-target_compile_options(${targetname} PRIVATE
+target_compile_options(
+        ${targetname} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/W4>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall>
-        )
+        $<$<CONFIG:DEBUG>:-DDEBUG>
+)
 
 target_include_directories(
         ${targetname} PUBLIC
