@@ -61,4 +61,7 @@ material = SubResource( 5 )
 shape = SubResource( 1 )
 
 [node name="Torch" parent="." instance=ExtResource( 2 )]
-dischargeRate = 1.0
+intensity = 2.5
+minFlickeringDuration = 500
+maxFlickeringDuration = 1000
+maxAnimationDelayTime = 8000

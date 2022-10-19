@@ -10,43 +10,69 @@
 #include "Node2D.hpp"
 #include "Timer.hpp"
 #include <iostream>
+#include <random>
 #include <string>
+
+#include "Timer.h"
+
+static std::random_device rnd_device;
+static std::mt19937 rnd_engine{rnd_device()};
+
+static constexpr int k_minFlickeringDuration = 250;  // ms
+static constexpr int k_maxFlickeringDuration = 750;  // ms
+static constexpr int k_minSpikeDuration = 20;        // ms
+static constexpr int k_maxSpikeDuration = 200;       // ms
+static constexpr int k_maxAnimationDelayTime = 3000; // ms
 
 class Torch : public godot::Node2D {
   GODOT_CLASS(Torch, godot::Node2D);
-  static constexpr float defaultDischargeRate = {1.0f};
+  static constexpr float defaultDischargeRate{5.0f};
   godot::Light2D *m_shadowCaster = nullptr;
   godot::Light2D *m_AmbientLight = nullptr;
-  godot::Timer *m_playAnimationTimer = nullptr;
-  godot::Timer *m_stopAnimationTimer = nullptr;
-  godot::Timer *m_blinkTimer = nullptr;
-  godot::Timer *m_stopBlinkTimer = nullptr;
+  KCE::Timer m_playAnimationTimer;
+  KCE::Timer m_stopAnimationTimer;
+  KCE::Timer m_startBlinkTimer;
+  KCE::Timer m_stopBlinkTimer;
+
   float m_energy{1.0f};
   float m_intensity{1.0f};
-  float m_prev_intensity{1.0f};
-  bool m_playAnimation{};
-  bool m_blink{};
+  int m_lastBatteryCharge{100};
+
+  bool m_animationPlayed = false;
+  float m_currentEnergy = 0.f;
 
   void get_nodes();
 
 public:
   float magnitude = 1.0f;
-  float dischargeRate = 1.0f;
-  Torch() {
-    std::cout << "Light Intensity: " << m_intensity << ", default magnitude: " << magnitude <<  std::endl; }
+  float dischargeRate = defaultDischargeRate;
+  int minFlickeringDuration = k_minFlickeringDuration;
+  int maxFlickeringDuration = k_maxFlickeringDuration;
+  int minSpikeDuration = k_minSpikeDuration;
+  int maxSpikeDuration = k_maxSpikeDuration;
+  int maxAnimationDelayTime = k_maxAnimationDelayTime;
+
+  std::uniform_int_distribution<int> animationDistribution{minFlickeringDuration, maxFlickeringDuration};
+  std::uniform_int_distribution<int> blinkingDistribution{minSpikeDuration, maxSpikeDuration};
+
+  Torch() { std::cout << "Light Intensity: " << m_intensity << ", default magnitude: " << magnitude << std::endl; }
+  ~Torch();
+
   static void _register_methods();
   void _init() {}
   void _ready();
   void _process(real_t delta);
   void set_energy(float energy);
   [[nodiscard]] float get_energy() const;
-  inline void discharge();
+  [[nodiscard]] inline int batteryCharge() const;
+  inline void printBatteryCharge() const;
+  void discharge();
   void full_charge();
-  void _on_PlayAnimationTimer_timeout();
-  void _on_BlinkTimer_timeout();
-  void _on_StopAnimationTimer_timeout();
-  void _on_StopBlinkTimer_timeout();
-  void playAnimation(real_t t);
+
+  void startAnimation();
+  void stopAnimation();
+  void startBlinking();
+  void stopBlinking();
 };
 
 #endif // COREGAME_TORCH_H

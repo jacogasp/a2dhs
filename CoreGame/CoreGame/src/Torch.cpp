@@ -4,48 +4,51 @@
 
 #include "Torch.h"
 #include "CoreMath.h"
+#include <cmath>
 #include <iostream>
-#include <string>
+
+Torch::~Torch() {
+  m_stopAnimationTimer.stop();
+  m_stopBlinkTimer.stop();
+  m_playAnimationTimer.stop();
+  m_startBlinkTimer.stop();
+}
 
 void Torch::_register_methods() {
   godot::register_property("intensity", &Torch::magnitude, 1.0f);
   godot::register_property("dischargeRate", &Torch::dischargeRate, defaultDischargeRate);
+  godot::register_property("minFlickeringDuration", &Torch::minFlickeringDuration, k_minFlickeringDuration);
+  godot::register_property("maxFlickeringDuration", &Torch::maxFlickeringDuration, k_maxFlickeringDuration);
+  godot::register_property("minSpikeDuration", &Torch::minSpikeDuration, k_minSpikeDuration);
+  godot::register_property("maxSpikeDuration", &Torch::maxSpikeDuration, k_maxSpikeDuration);
+  godot::register_property("maxAnimationDelayTime", &Torch::maxAnimationDelayTime, k_maxAnimationDelayTime);
   godot::register_method("_ready", &Torch::_ready);
   godot::register_method("_process", &Torch::_process);
-  godot::register_method("_on_PlayAnimationTimer_timeout", &Torch::_on_PlayAnimationTimer_timeout);
-  godot::register_method("_on_BlinkTimer_timeout", &Torch::_on_BlinkTimer_timeout);
-  godot::register_method("_on_StopAnimationTimer_timeout", &Torch::_on_StopAnimationTimer_timeout);
-  godot::register_method("_on_StopBlinkTimer_timeout", &Torch::_on_StopBlinkTimer_timeout);
 }
 
 void Torch::get_nodes() {
   m_shadowCaster = get_node<godot::Light2D>("ShadowCaster");
   m_AmbientLight = get_node<godot::Light2D>("AmbientLight");
-  m_playAnimationTimer = get_node<godot::Timer>("PlayAnimationTimer");
-  m_stopAnimationTimer = get_node<godot::Timer>("StopAnimationTimer");
-  m_blinkTimer = get_node<godot::Timer>("BlinkTimer");
-  m_stopBlinkTimer = get_node<godot::Timer>("StopBlinkTimer");
 }
 
 void Torch::_ready() {
   get_nodes();
   full_charge();
   set_energy(magnitude * m_intensity);
+  animationDistribution = std::uniform_int_distribution{minFlickeringDuration, maxFlickeringDuration};
+  blinkingDistribution = std::uniform_int_distribution{minSpikeDuration, maxSpikeDuration};
   std::cout << "Torch ready. Light magnitude: " << magnitude << ", energy: " << get_energy()
             << ", discharge rate: " << dischargeRate << std::endl;
 }
 
 void Torch::_process(real_t delta) {
   discharge();
-  if (m_intensity <= 0.5f && !m_playAnimation)
-    m_stopAnimationTimer->start();
-
-  if (m_blink) {
-    static real_t t{0};
-    t += delta;
-    playAnimation(t / m_stopBlinkTimer->get_wait_time());
+  if (m_intensity <= 0.75f && !m_animationPlayed) {
+    m_animationPlayed = true;
+    startAnimation();
   }
-  if (m_intensity <= 0.25f) full_charge();
+
+  if (m_intensity <= 0.1f) full_charge();
 }
 
 void Torch::set_energy(float energy) {
@@ -58,55 +61,72 @@ void Torch::set_energy(float energy) {
 
 float Torch::get_energy() const { return m_energy; }
 
+int Torch::batteryCharge() const { return std::floor(m_intensity * 100.0f); }
+
+void Torch::printBatteryCharge() const {
+  godot::Godot::print("Battery charge: " + godot::String::num_int64(batteryCharge()) + "%");
+}
+
 void Torch::discharge() {
   m_intensity -= dischargeRate / 10000.f;
+
+#ifdef DEBUG
+  auto bc = batteryCharge();
+  if (bc % 10 == 0 && bc != m_lastBatteryCharge) {
+    printBatteryCharge();
+    m_lastBatteryCharge = bc;
+  }
+#endif
   if (m_intensity <= 0) {
     m_intensity = 0.0f;
     return;
   }
-
   set_energy(magnitude * m_intensity);
-
-  if (m_prev_intensity - m_intensity >= 0.05) {
-    std::cout << "Light intensity: " << m_intensity << ", energy: " << get_energy() << std::endl;
-    m_prev_intensity = m_intensity;
-  }
 }
 
 void Torch::full_charge() {
   m_intensity = 1.0f;
-  m_prev_intensity = 1.0f;
-}
+  m_lastBatteryCharge = 100;
+  m_animationPlayed = false;
+  m_stopAnimationTimer.stop();
+  m_stopBlinkTimer.stop();
+  m_playAnimationTimer.stop();
+  m_startBlinkTimer.stop();
 
-void Torch::_on_PlayAnimationTimer_timeout() {
+  godot::Godot::print("Battery fully charged!");
 #ifdef DEBUG
-  std::cout << "Start Animation Timer" << std::endl;
+  printBatteryCharge();
 #endif
-  m_playAnimation = true;
-  m_blinkTimer->start();
-  m_stopAnimationTimer->start();
 }
 
-void Torch::_on_BlinkTimer_timeout() {
-  m_blink = true;
-  m_stopBlinkTimer->start();
-}
-
-void Torch::_on_StopAnimationTimer_timeout() {
+void Torch::startAnimation() {
 #ifdef DEBUG
-  std::cout << "Stop animation timer" << std::endl;
+  std::cout << "Start blinking animation" << std::endl;
 #endif
-  m_playAnimation = false;
-  if (!m_blinkTimer->is_stopped()) m_blinkTimer->stop();
-  m_stopBlinkTimer->start();
+  startBlinking();
+  auto delay = animationDistribution(rnd_engine);
+  m_stopAnimationTimer.setTimeout([&]() { stopAnimation(); }, delay);
 }
 
-void Torch::_on_StopBlinkTimer_timeout() {
-  m_blink = false;
-  m_blinkTimer->start();
+void Torch::stopAnimation() {
+#ifdef DEBUG
+  std::cout << "Stop blinking animation" << std::endl;
+#endif
+  m_startBlinkTimer.stop();
+  m_stopBlinkTimer.stop();
+  auto nextAnimationDelay = static_cast<int>((float)maxAnimationDelayTime * m_intensity);
+  m_playAnimationTimer.setTimeout([&]() { startAnimation(); }, nextAnimationDelay);
 }
 
-void Torch::playAnimation(real_t t) {
-  auto intensity = 1.0f - 0.5f * CoreGame::crossfade(CoreGame::smoothStep3(t), 1 - CoreGame::smoothStep3(t), t);
-  set_energy(magnitude * intensity);
+void Torch::startBlinking() {
+  m_currentEnergy = get_energy();
+  set_energy(m_currentEnergy * 0.75f);
+  auto delay = blinkingDistribution(rnd_engine);
+  m_stopBlinkTimer.setTimeout([&]() { stopBlinking(); }, delay);
+}
+
+void Torch::stopBlinking() {
+  set_energy(m_currentEnergy);
+  auto delay = blinkingDistribution(rnd_engine);
+  m_startBlinkTimer.setTimeout([&]() { startBlinking(); }, delay);
 }
