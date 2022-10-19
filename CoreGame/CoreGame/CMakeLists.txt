@@ -13,7 +13,7 @@ add_library(
         include/Torch.h src/Torch.cpp
         include/CoreMath.h
         include/VisibilityPolygon.h src/VisibilityPolygon.cpp
-)
+        include/Timer.h)
 
 target_link_libraries(CoreGame PUBLIC godot-cpp)
 set(COMPILE_OPTIONS )
@@ -40,3 +40,6 @@ target_include_directories(
 
 export(TARGETS ${targetname} godot-cpp NAMESPACE CoreGame:: FILE /usr/local/lib/CoreGameConfig.cmake)
 install(TARGETS ${targetname} godot-cpp)
+
+## Tests
+add_subdirectory(tests)
