@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Battery.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Main.gdns" type="Script" id=3]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Map" parent="." instance=ExtResource( 2 )]
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
+color = Color( 0, 0, 0, 1 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -768, -248 )
+scale = Vector2( 1, 1 )
+collision_mask = 1
+speed = 175.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -768, -248 )
+current = true
+smoothing_enabled = true
+
+[node name="Batteries" type="Node" parent="."]
+
+[node name="Battery" parent="Batteries" instance=ExtResource( 1 )]
+position = Vector2( -448, 544 )
+
+[node name="Battery2" parent="Batteries" instance=ExtResource( 1 )]
+position = Vector2( 248, 552 )
+
+[node name="Battery3" parent="Batteries" instance=ExtResource( 1 )]
+position = Vector2( 544, 64 )
