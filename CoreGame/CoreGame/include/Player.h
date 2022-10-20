@@ -17,6 +17,8 @@
 #include <KinematicCollision2D.hpp>
 #include <Viewport.hpp>
 
+#include <functional>
+
 #include "Torch.h"
 
 class Player : public godot::KinematicBody2D {
@@ -25,6 +27,8 @@ class Player : public godot::KinematicBody2D {
   godot::Vector2 m_acceleration{};
   godot::AnimatedSprite *m_animatedSprite = nullptr;
   Torch *m_torch = nullptr;
+  bool m_userInteractionEnabled = true;
+  std::function<void(void)> m_showDialogueCallback;
 
 public:
   real_t speed = 200.0f;
@@ -34,6 +38,8 @@ public:
   void _init(){};
   void _ready();
   void _physics_process(real_t p_delta);
+  void setUserInteraction(bool enabled) { m_userInteractionEnabled = enabled; }
+  void setOnShowDialogueCallback(std::function<void(void)> callback) { m_showDialogueCallback = callback; }
   [[nodiscard]] godot::Vector2 get_direction() const;
   void _on_Player_area_entered(godot::Area2D *area);
   void _on_VisibilityNotifier2D_screen_exited();

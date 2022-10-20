@@ -9,32 +9,22 @@
 #include <CanvasLayer.hpp>
 #include <Godot.hpp>
 #include <Label.hpp>
+#include <Sprite.hpp>
 #include <Timer.hpp>
-#include <iostream>
-#include <sstream>
-#include <string>
 
 class HUD : public godot::CanvasLayer {
   GODOT_CLASS(HUD, godot::CanvasLayer)
-
-  godot::Label *_scoreLabel;
+  godot::Sprite *_dialogueSprite;
   godot::Label *_messageLabel;
-  godot::Button *_startButton;
-  godot::Timer *_start_message_timer;
-  godot::Timer *_get_ready_message_timer;
-  godot::Timer *_start_button_timer;
+  bool m_dialogue_visible = false;
+
 
 public:
   void _init() {}
   void _ready();
-  void setup_timers();
-  void show_get_ready();
-  void show_game_over();
-  void update_score(int score);
-  void _on_StartButton_pressed();
-  void _on_StartButtonTimer_timeout();
-  void _on_StartMessageTimer_timeout();
-  void _on_GetReadyMessageTimer_timeout();
+  bool is_dialogue_visible() const { return m_dialogue_visible; }
+  void displayDialogue(const godot::String &message);
+  void hideDialogue();
   static void _register_methods();
 };
 

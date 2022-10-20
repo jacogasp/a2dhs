@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Battery.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Main.gdns" type="Script" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/DialogueTrigger.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=6]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 3 )
@@ -38,3 +40,15 @@ position = Vector2( 248, 552 )
 
 [node name="Battery3" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 544, 64 )
+
+[node name="DialogueTriggers" type="Node" parent="."]
+
+[node name="DialogueTrigger" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( -448, 496 )
+scale = Vector2( 6.43999, 1 )
+
+[node name="DialogueTrigger2" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( -80, 64 )
+scale = Vector2( 1.3242, 6.32 )
+
+[node name="HUD" parent="." instance=ExtResource( 6 )]

@@ -15,6 +15,10 @@ void Player::_ready() {
 std::ostream &operator<<(std::ostream &os, const godot::Vector2 &v) { return os << "x: " << v.x << ", y: " << v.y; }
 
 void Player::_physics_process(const real_t p_delta) {
+  if (!m_userInteractionEnabled) {
+    m_animatedSprite->stop();
+    return;
+  }
   auto input = godot::Input::get_singleton();
   godot::Vector2 velocity{0, 0};
   velocity.x = input->get_action_strength("move_right") - input->get_action_strength("move_left");
@@ -46,6 +50,11 @@ void Player::_on_Player_area_entered(godot::Area2D *area) {
   if (area->is_in_group("batteries")) {
     m_torch->full_charge();
     area->queue_free();
+  } else if (area->is_in_group("dialogues")) {
+    if (m_showDialogueCallback) {
+      m_showDialogueCallback();
+      area->queue_free();
+    }
   }
 }
 
