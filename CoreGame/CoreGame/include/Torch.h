@@ -38,7 +38,7 @@ class Torch : public godot::Node2D {
   float m_intensity{1.0f};
   int m_lastBatteryCharge{100};
 
-  bool m_animationPlayed = false;
+  bool m_animationAutoPlaying = false;
   float m_currentEnergy = 0.f;
 
   void get_nodes();

@@ -43,8 +43,8 @@ void Torch::_ready() {
 
 void Torch::_process(real_t delta) {
   discharge();
-  if (m_intensity <= 0.75f && !m_animationPlayed) {
-    m_animationPlayed = true;
+  if (m_intensity <= 0.75f && !m_animationAutoPlaying) {
+    m_animationAutoPlaying = true;
     startAnimation();
   }
 
@@ -87,7 +87,7 @@ void Torch::discharge() {
 void Torch::full_charge() {
   m_intensity = 1.0f;
   m_lastBatteryCharge = 100;
-  m_animationPlayed = false;
+  m_animationAutoPlaying = false;
   m_stopAnimationTimer.stop();
   m_stopBlinkTimer.stop();
   m_playAnimationTimer.stop();
