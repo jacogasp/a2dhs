@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="A 2D Horror Story"
-run/main_scene="res://Scenes/demo.tscn"
+run/main_scene="res://Scenes/MyScene.tscn"
 config/icon="res://icon.png"
 
 [global]
@@ -64,6 +64,11 @@ jump={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Power Ups"
 
 [physics]
 
