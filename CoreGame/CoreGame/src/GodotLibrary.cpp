@@ -1,4 +1,5 @@
 #include "Controller.h"
+#include "DialogueTrigger.h"
 #include "HUD.h"
 #include "Main.h"
 #include "Map.h"
@@ -26,4 +27,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
   register_class<Map>();
   register_class<VisibilityPolygon>();
   register_class<Torch>();
+  register_class<DialogueTrigger>();
 }

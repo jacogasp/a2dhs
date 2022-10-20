@@ -46,9 +46,15 @@ position = Vector2( 544, 64 )
 [node name="DialogueTrigger" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -448, 496 )
 scale = Vector2( 6.43999, 1 )
+DialogueKey = "dialogue_1"
 
 [node name="DialogueTrigger2" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -80, 64 )
+scale = Vector2( 1.3242, 6.32 )
+DialogueKey = "dialogue_2"
+
+[node name="NoMessageTrigger" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 80, 64 )
 scale = Vector2( 1.3242, 6.32 )
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]

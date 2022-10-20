@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <iostream>
 
+#include "DialogueTrigger.h"
+
 void Player::_ready() {
   m_animatedSprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
   m_torch = get_node<Torch>("Torch");
@@ -52,7 +54,8 @@ void Player::_on_Player_area_entered(godot::Area2D *area) {
     area->queue_free();
   } else if (area->is_in_group("dialogues")) {
     if (m_showDialogueCallback) {
-      m_showDialogueCallback();
+      auto trigger = godot::Object::cast_to<DialogueTrigger>(area);
+      m_showDialogueCallback(trigger->dialogueKey);
       area->queue_free();
     }
   }
