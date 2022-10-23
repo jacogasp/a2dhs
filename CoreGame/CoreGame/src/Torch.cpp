@@ -16,7 +16,7 @@ Torch::~Torch() {
 
 void Torch::_register_methods() {
   godot::register_property("intensity", &Torch::magnitude, 1.0f);
-  godot::register_property("dischargeRate", &Torch::dischargeRate, defaultDischargeRate);
+  godot::register_property("batteryLifeTime", &Torch::batteryLifeTime, 60.0f);
   godot::register_property("minFlickeringDuration", &Torch::minFlickeringDuration, k_minFlickeringDuration);
   godot::register_property("maxFlickeringDuration", &Torch::maxFlickeringDuration, k_maxFlickeringDuration);
   godot::register_property("minSpikeDuration", &Torch::minSpikeDuration, k_minSpikeDuration);
@@ -38,11 +38,12 @@ void Torch::_ready() {
   animationDistribution = std::uniform_int_distribution{minFlickeringDuration, maxFlickeringDuration};
   blinkingDistribution = std::uniform_int_distribution{minSpikeDuration, maxSpikeDuration};
   std::cout << "Torch ready. Light magnitude: " << magnitude << ", energy: " << get_energy()
-            << ", discharge rate: " << dischargeRate << std::endl;
+            << ", battery lifetime: " << batteryLifeTime << " s" << std::endl;
 }
 
 void Torch::_process(real_t delta) {
-  discharge();
+  m_batteryCurrentTime += delta;
+  discharge(m_batteryCurrentTime / batteryLifeTime);
   if (m_intensity <= 0.75f && !m_animationAutoPlaying) {
     m_animationAutoPlaying = true;
     startAnimation();
@@ -67,8 +68,8 @@ void Torch::printBatteryCharge() const {
   godot::Godot::print("Battery charge: " + godot::String::num_int64(batteryCharge()) + "%");
 }
 
-void Torch::discharge() {
-  m_intensity -= dischargeRate / 10000.f;
+void Torch::discharge(real_t t) {
+  m_intensity = CoreGame::flip(CoreGame::smoothStart2(t));
 
 #ifdef DEBUG
   auto bc = batteryCharge();
@@ -87,6 +88,7 @@ void Torch::discharge() {
 void Torch::full_charge() {
   m_intensity = 1.0f;
   m_lastBatteryCharge = 100;
+  m_batteryCurrentTime = 0.0f;
   m_animationAutoPlaying = false;
   m_stopAnimationTimer.stop();
   m_stopBlinkTimer.stop();

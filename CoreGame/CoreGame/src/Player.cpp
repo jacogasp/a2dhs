@@ -37,11 +37,6 @@ void Player::_physics_process(const real_t p_delta) {
   }
 }
 
-void Player::_on_VisibilityNotifier2D_screen_exited() {
-  godot::Godot::print("Player disappears");
-  queue_free();
-}
-
 godot::Vector2 Player::get_direction() const {
   godot::Vector2 v{};
   v.set_rotation(get_global_rotation());
@@ -66,6 +61,5 @@ void Player::_register_methods() {
   godot::register_property("rotation_weight", &Player::rotation_weight, (real_t)0.5f);
   godot::register_method("_ready", &Player::_ready);
   godot::register_method("_physics_process", &Player::_physics_process);
-  godot::register_method("_on_VisibilityNotifier2D_screen_exited", &Player::_on_VisibilityNotifier2D_screen_exited);
   godot::register_method("_on_Player_area_entered", &Player::_on_Player_area_entered);
 }

@@ -8,17 +8,29 @@
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
 
-void load_dialogues(const char *path, godot::Dictionary &d) {
-  auto file = godot::File::_new();
-  file->open(path, godot::File::READ);
-  if (!file->is_open()) {
-    std::cerr << "Cannot find file at " << path << ". Exit" << std::endl;
-    std::exit(EXIT_FAILURE);
+namespace KCE {
+class File {
+  godot::File *m_file;
+
+public:
+  explicit File(const char *path, godot::File::ModeFlags flags = godot::File::READ) : m_file{godot::File::_new()} {
+    m_file->open(path, flags);
+    if (!m_file->is_open()) {
+      std::cerr << "Cannot find file at " << path << ". Exit" << std::endl;
+      std::exit(EXIT_FAILURE);
+    }
   }
-  godot::String buff{file->get_as_text()};
-  auto json = godot::JSON::get_singleton()->parse(buff);
+  ~File() {
+    m_file->close();
+    m_file->free();
+  }
+  auto get_as_text() { return m_file->get_as_text(); }
+};
+} // namespace KCE
+void load_dialogues(const char *path, godot::Dictionary &d) {
+  KCE::File file{path};
+  auto json = godot::JSON::get_singleton()->parse(file.get_as_text());
   d = json->get_result();
-  file->close();
 }
 
 void Main::_ready() {

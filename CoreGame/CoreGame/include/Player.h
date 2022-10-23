@@ -44,7 +44,6 @@ public:
   }
   [[nodiscard]] godot::Vector2 get_direction() const;
   void _on_Player_area_entered(godot::Area2D *area);
-  void _on_VisibilityNotifier2D_screen_exited();
 };
 
 #endif // COREGAME_PLAYER_H
