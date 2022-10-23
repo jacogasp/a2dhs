@@ -1,5 +1,6 @@
 {
   "dialogue_1": "Great! More batteries.",
+  "dialogue_4": "We are on the right track. Proceed north.",
   "dialogue_5": "Are we sure this is the correct direction? I should be heading north..",
   "dialogue_11": "Hungry and foolish they said...we keep on going the right direction, innit?",
   "dialogue_12": "Umpf...[coordinates] 64.201618 and -149.492362...",
@@ -12,5 +13,13 @@
   "dialogue_19": "Ok Crazy Jacopo, stay focus and run the hell out of this town! Remember: proceed north.",
   "dialogue_20": "What the hell happened here...",
   "dialogue_21": "With the torch I should arrive alive and safe, they won't touch me.",
-  "dialogue_22": "Of course, blood trails on the way. How could the story be any different? Keep your eyes open."
+  "dialogue_22": "Of course, blood trails on the way. How could the story be any different? Keep your eyes open.",
+  "dialogue_31": "Stupid was to start a war against this invisible monsters...",
+  "dialogue_32": "'Cause indeed the war killed our pepole... That's the fact. Idiots...",
+  "dialogue_33": "I still have hope in the last survivals of the nuclear war.",
+  "dialogue_41": "I see you through the darkness, your bloody eyes do not scare me!",
+  "dialogue_42": "I have to run out of here.",
+  "dialogue_51": "What happened to them all?",
+  "dialogue_52": "Is it because of the bombs?",
+  "dialogue_53": "No longer matters. Eyes on the road, I must continue north."
 }
