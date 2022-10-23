@@ -38,7 +38,7 @@ smoothing_enabled = true
 position = Vector2( 248, 552 )
 
 [node name="Battery3" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 544, 64 )
+position = Vector2( 557, -38 )
 
 [node name="DialogueTriggers" type="Node" parent="."]
 
@@ -50,14 +50,56 @@ DialogueKey = "dialogue_2"
 [node name="T11" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 551, 604 )
 rotation = -1.5708
-scale = Vector2( 1.3242, 6.32 )
-DialogueKey = "dialogue_2"
+scale = Vector2( 1.3242, 11.44 )
+DialogueKey = "dialogue_11"
 
 [node name="T12" parent="DialogueTriggers" instance=ExtResource( 5 )]
-position = Vector2( 548, 532 )
+position = Vector2( 547, 567 )
 rotation = -1.5708
-scale = Vector2( 1.3242, 6.32 )
-DialogueKey = "dialogue_2"
+scale = Vector2( 1.30912, 11.28 )
+DialogueKey = "dialogue_12"
+
+[node name="T13" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 551, 531 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 11 )
+DialogueKey = "dialogue_13"
+
+[node name="T14" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 542, 439 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 10.12 )
+DialogueKey = "dialogue_14"
+
+[node name="T15" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 546, 400 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_15"
+
+[node name="T16" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 564, 71 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_16"
+
+[node name="T17" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 549, -102 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_17"
+
+[node name="T18" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 540, -288 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_18"
+
+[node name="T19" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 537, -328 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_19"
 
 [node name="NoMessageTrigger" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 80, 64 )
