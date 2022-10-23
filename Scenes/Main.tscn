@@ -109,13 +109,19 @@ DialogueKey = "dialogue_19"
 position = Vector2( 539, -525 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_19"
+DialogueKey = "dialogue_20"
 
 [node name="T21" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 540, -554 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_19"
+DialogueKey = "dialogue_21"
+
+[node name="T22" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 552, -763 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_22"
 
 [node name="getback_1" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -725, 313 )
