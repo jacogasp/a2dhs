@@ -39,13 +39,14 @@ class Torch : public godot::Node2D {
   int m_lastBatteryCharge{100};
 
   bool m_animationAutoPlaying = false;
-  float m_currentEnergy = 0.f;
+  float m_currentEnergy{0.f};
+  float m_batteryCurrentTime{0.0f};
 
   void get_nodes();
 
 public:
-  float magnitude = 1.0f;
-  float dischargeRate = defaultDischargeRate;
+  float magnitude{1.0f};
+  float batteryLifeTime{60}; // 2 min
   int minFlickeringDuration = k_minFlickeringDuration;
   int maxFlickeringDuration = k_maxFlickeringDuration;
   int minSpikeDuration = k_minSpikeDuration;
@@ -66,7 +67,7 @@ public:
   [[nodiscard]] float get_energy() const;
   [[nodiscard]] inline int batteryCharge() const;
   inline void printBatteryCharge() const;
-  void discharge();
+  void discharge(real_t t);
   void full_charge();
 
   void startAnimation();
