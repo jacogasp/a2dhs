@@ -17,24 +17,22 @@ visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 536, 564 )
+position = Vector2( 549, 638 )
 rotation = -1.5708
 scale = Vector2( 1, 1 )
 collision_mask = 1
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+position = Vector2( -6.10352e-05, 3 )
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 536, 564 )
+position = Vector2( 552, 638 )
 rotation = -1.5708
 current = true
 smoothing_enabled = true
 
 [node name="Batteries" type="Node" parent="."]
-
-[node name="Battery" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -448, 544 )
 
 [node name="Battery2" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 248, 552 )
@@ -44,13 +42,20 @@ position = Vector2( 544, 64 )
 
 [node name="DialogueTriggers" type="Node" parent="."]
 
-[node name="DialogueTrigger" parent="DialogueTriggers" instance=ExtResource( 5 )]
-position = Vector2( -448, 496 )
-scale = Vector2( 6.43999, 1 )
-DialogueKey = "dialogue_1"
-
 [node name="DialogueTrigger2" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -80, 64 )
+scale = Vector2( 1.3242, 6.32 )
+DialogueKey = "dialogue_2"
+
+[node name="T11" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 551, 604 )
+rotation = -1.5708
+scale = Vector2( 1.3242, 6.32 )
+DialogueKey = "dialogue_2"
+
+[node name="T12" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 548, 532 )
+rotation = -1.5708
 scale = Vector2( 1.3242, 6.32 )
 DialogueKey = "dialogue_2"
 
