@@ -42,14 +42,15 @@ void Torch::_ready() {
 }
 
 void Torch::_process(real_t delta) {
+  if (m_isPaused) return;
   m_batteryCurrentTime += delta;
   discharge(m_batteryCurrentTime / batteryLifeTime);
-  if (m_intensity <= 0.75f && !m_animationAutoPlaying) {
-    m_animationAutoPlaying = true;
-    startAnimation();
-  }
+  if (m_intensity <= 0.75f && !m_animationAutoPlaying) startAnimation();
 
-  if (m_intensity <= 0.1f) full_charge();
+  if (m_intensity <= 0.1f) {
+    if (m_onBatteryRunOut) m_onBatteryRunOut();
+    pause();
+  }
 }
 
 void Torch::set_energy(float energy) {
@@ -101,10 +102,24 @@ void Torch::full_charge() {
 #endif
 }
 
+void Torch::pause() {
+  m_isPaused = true;
+  m_stopAnimationTimer.stop();
+  m_stopBlinkTimer.stop();
+  m_playAnimationTimer.stop();
+  m_startBlinkTimer.stop();
+}
+
+void Torch::resume() {
+  m_isPaused = false;
+  if (m_intensity <= 0.75f && !m_animationAutoPlaying) startAnimation();
+}
+
 void Torch::startAnimation() {
 #ifdef DEBUG
   std::cout << "Start blinking animation" << std::endl;
 #endif
+  m_animationAutoPlaying = true;
   startBlinking();
   auto delay = animationDistribution(rnd_engine);
   m_stopAnimationTimer.setTimeout([&]() { stopAnimation(); }, delay);

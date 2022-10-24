@@ -23,11 +23,13 @@
 
 class Player : public godot::KinematicBody2D {
   GODOT_CLASS(Player, godot::KinematicBody2D)
+  godot::Vector2 m_initialPosition{};
   godot::Vector2 m_velocity{};
   godot::Vector2 m_acceleration{};
   godot::AnimatedSprite *m_animatedSprite = nullptr;
   Torch *m_torch = nullptr;
   bool m_userInteractionEnabled = true;
+  std::function<void(void)> m_onBatteryRunOut;
   std::function<void(const godot::String &)> m_showDialogueCallback;
 
 public:
@@ -38,10 +40,15 @@ public:
   void _init(){};
   void _ready();
   void _physics_process(real_t p_delta);
-  void setUserInteraction(bool enabled) { m_userInteractionEnabled = enabled; }
-  void setOnShowDialogueCallback(std::function<void(const godot::String)> callback) {
-    m_showDialogueCallback = callback;
+  void resetPlayer();
+  void setUserInteraction(bool enabled);
+  void enableInteraction() { setUserInteraction(true); }
+  void disableInteraction() { setUserInteraction(false); }
+  void setOnBatterRunOutCallback(const std::function<void(void)> &&callback) { m_onBatteryRunOut = callback; }
+  void setOnShowDialogueCallback(std::function<void(const godot::String &)> &&callback) {
+    m_showDialogueCallback = std::move(callback);
   }
+
   [[nodiscard]] godot::Vector2 get_direction() const;
   void _on_Player_area_entered(godot::Area2D *area);
 };

@@ -8,9 +8,11 @@
 #include "DialogueTrigger.h"
 
 void Player::_ready() {
+  m_initialPosition = get_position();
   m_animatedSprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
   m_torch = get_node<Torch>("Torch");
   m_animatedSprite->set_animation("walk");
+  m_torch->setOnBatterRunOutCallback([&]() { m_onBatteryRunOut(); });
   godot::Godot::print("Player ready");
 }
 
@@ -35,6 +37,17 @@ void Player::_physics_process(const real_t p_delta) {
   } else {
     m_animatedSprite->stop();
   }
+}
+
+void Player::resetPlayer() {
+  set_position(m_initialPosition);
+  m_torch->full_charge();
+}
+
+void Player::setUserInteraction(bool enabled) {
+  m_userInteractionEnabled = enabled;
+  if (enabled) m_torch->resume();
+  else m_torch->pause();
 }
 
 godot::Vector2 Player::get_direction() const {

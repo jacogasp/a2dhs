@@ -26,7 +26,6 @@ static constexpr int k_maxAnimationDelayTime = 3000; // ms
 
 class Torch : public godot::Node2D {
   GODOT_CLASS(Torch, godot::Node2D);
-  static constexpr float defaultDischargeRate{5.0f};
   godot::Light2D *m_shadowCaster = nullptr;
   godot::Light2D *m_AmbientLight = nullptr;
   KCE::Timer m_playAnimationTimer;
@@ -41,6 +40,8 @@ class Torch : public godot::Node2D {
   bool m_animationAutoPlaying = false;
   float m_currentEnergy{0.f};
   float m_batteryCurrentTime{0.0f};
+  bool m_isPaused = false;
+  std::function<void(void)> m_onBatteryRunOut;
 
   void get_nodes();
 
@@ -68,8 +69,10 @@ public:
   [[nodiscard]] inline int batteryCharge() const;
   inline void printBatteryCharge() const;
   void discharge(real_t t);
+  void setOnBatterRunOutCallback(const std::function<void(void)> &&callback) { m_onBatteryRunOut = callback; }
   void full_charge();
-
+  void pause();
+  void resume();
   void startAnimation();
   void stopAnimation();
   void startBlinking();

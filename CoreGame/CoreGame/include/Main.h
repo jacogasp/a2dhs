@@ -11,6 +11,8 @@
 #include <InputEvent.hpp>
 #include <Node2D.hpp>
 
+#include <functional>
+
 #include "HUD.h"
 #include "Player.h"
 
@@ -20,13 +22,17 @@ class Main : public godot::Node2D {
   godot::Dictionary m_dialogues;
   Player *m_player = nullptr;
   HUD *m_hud = nullptr;
+  bool m_firstGame = true;
+  bool m_gameOver = false;
 
 public:
   void _init() {}
   void _ready();
   void _process();
   void _input();
-  void displayDialogue(const godot::String &dialogueKey);
+  void gameOver();
+  void resetGame();
+  void displayDialogue(const godot::String &dialogueKey) const;
   static void _register_methods();
 };
 

@@ -7,6 +7,7 @@
 #include <Input.hpp>
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
+#include <SceneTree.hpp>
 
 namespace KCE {
 class File {
@@ -34,18 +35,39 @@ void load_dialogues(const char *path, godot::Dictionary &d) {
 }
 
 void Main::_ready() {
+  load_dialogues("res://Assets/dialogues.json", m_dialogues);
+
   m_player = get_node<Player>("Player");
-  m_player->setOnShowDialogueCallback([&](const godot::String &dialogueKey) { displayDialogue(dialogueKey); });
   m_hud = get_node<HUD>("HUD");
   m_darknessLayer = get_node<godot::CanvasModulate>("Darkness");
+
+  m_player->setOnShowDialogueCallback([&](const godot::String &dialogueKey) { displayDialogue(dialogueKey); });
+  m_player->setOnBatterRunOutCallback([&]() { gameOver(); });
+  m_player->disableInteraction();
+  m_hud->showStart();
+  m_hud->hideGameOver();
+  m_hud->hideDialogue();
   if (!m_darknessLayer->is_visible()) m_darknessLayer->set_visible(true);
-  load_dialogues("res://Assets/dialogues.json", m_dialogues);
+
   godot::Godot::print("Main scene ready");
 }
 
 void Main::_process() {}
 
-void Main::displayDialogue(const godot::String &dialogueKey) {
+void Main::gameOver() {
+  m_gameOver = true;
+  m_hud->showGameOver();
+  m_player->disableInteraction();
+}
+
+void Main::resetGame() {
+  m_player->resetPlayer();
+  m_player->enableInteraction();
+  m_hud->hideGameOver();
+  m_gameOver = false;
+}
+
+void Main::displayDialogue(const godot::String &dialogueKey) const {
   godot::String msg;
   if (m_dialogues.has(dialogueKey)) {
     msg = m_dialogues[dialogueKey];
@@ -60,8 +82,21 @@ void Main::displayDialogue(const godot::String &dialogueKey) {
 
 void Main::_input() {
   if (godot::Input::get_singleton()->is_action_just_released("ui_accept")) {
+    if (m_firstGame) {
+      m_firstGame = false;
+      m_player->enableInteraction();
+      m_hud->hideStart();
+      return;
+    }
+
+    if (m_gameOver) {
+      resetGame();
+      get_tree()->reload_current_scene();
+      return;
+    }
+
     m_hud->hideDialogue();
-    m_player->setUserInteraction(true);
+    m_player->enableInteraction();
   }
 }
 
