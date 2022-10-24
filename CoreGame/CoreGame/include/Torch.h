@@ -9,6 +9,7 @@
 #include "Light2D.hpp"
 #include "Node2D.hpp"
 #include "Timer.hpp"
+#include <functional>
 #include <iostream>
 #include <random>
 #include <string>
