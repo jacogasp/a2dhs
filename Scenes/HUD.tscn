@@ -24,6 +24,7 @@ font_data = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="StartGame" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="TitleLabel" type="Label" parent="StartGame"]
 anchor_top = 0.5
@@ -50,6 +51,7 @@ align = 1
 autowrap = true
 
 [node name="GameOver" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="TheyCaughtYouLabel" type="Label" parent="GameOver"]
 anchor_top = 0.5
@@ -88,6 +90,7 @@ align = 1
 autowrap = true
 
 [node name="Dialogue" type="Sprite" parent="."]
+visible = false
 position = Vector2( 512, 520 )
 scale = Vector2( 0.6375, 0.6375 )
 texture = ExtResource( 3 )
@@ -104,7 +107,6 @@ rect_scale = Vector2( 0.79381, 1.02413 )
 rect_pivot_offset = Vector2( 176, 104 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Mejo smells 
-(Press Enter to continue)"
+text = "Dialogue"
 valign = 1
 autowrap = true
