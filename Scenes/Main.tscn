@@ -301,6 +301,24 @@ rotation = -4.71238
 scale = Vector2( 1.3242, 13.56 )
 DialogueKey = "dialogue_5"
 
+[node name="getback_8" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 3690, -4258 )
+rotation = -4.71238
+scale = Vector2( 16.5603, 27.5147 )
+DialogueKey = "dialogue_6"
+
+[node name="getback_9" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( -2524, -5691 )
+rotation = -4.71238
+scale = Vector2( 16.5603, 25.4764 )
+DialogueKey = "dialogue_6"
+
+[node name="getback_10" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( -2722, -6857 )
+rotation = -4.71238
+scale = Vector2( 16.7861, 22.371 )
+DialogueKey = "dialogue_6"
+
 [node name="getback_4" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 2126, -1619 )
 rotation = -4.71238
@@ -354,5 +372,11 @@ position = Vector2( -209, -5618 )
 rotation = -1.5708
 scale = Vector2( 12.7306, -14.99 )
 DialogueKey = "dialogue_3"
+
+[node name="correct_msg_6" parent="DialogueTriggers" instance=ExtResource( 5 )]
+position = Vector2( 3402, -7288 )
+rotation = -1.5708
+scale = Vector2( 12.7306, -14.99 )
+DialogueKey = "dialogue_2"
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
