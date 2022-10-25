@@ -125,215 +125,258 @@ position = Vector2( -876, -456 )
 position = Vector2( 551, 604 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 11.44 )
+DialogueKey = "dialogue_11"
 
 [node name="T12" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 547, 567 )
 rotation = -1.5708
 scale = Vector2( 1.30912, 11.28 )
+DialogueKey = "dialogue_12"
 
 [node name="T13" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 551, 531 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 11 )
+DialogueKey = "dialogue_13"
 
 [node name="T14" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 542, 439 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 10.12 )
+DialogueKey = "dialogue_14"
 
 [node name="T15" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 546, 400 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_15"
 
 [node name="T16" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 564, 71 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_16"
 
 [node name="T17" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 549, -102 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_17"
 
 [node name="T18" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 548, -256 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_18"
 
 [node name="T19" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 543, -289 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_19"
 
 [node name="T20" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 539, -525 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_20"
 
 [node name="T21" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 540, -554 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_21"
 
 [node name="T22" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 552, -763 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_22"
 
 [node name="T31" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1011, -1371 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_31"
 
 [node name="T32" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1006, -1439 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_32"
 
 [node name="T33" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1006, -1588 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_33"
 
 [node name="T71" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 3072, -313 )
 rotation = -1.5708
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_71"
 
 [node name="T41" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1935, 97 )
 rotation = -3.14159
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_41"
 
 [node name="T42" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1983, 92 )
 rotation = -3.14159
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_42"
 
 [node name="T51" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -870, -210 )
 rotation = -3.14159
 scale = Vector2( 13.3052, 1.72189 )
+DialogueKey = "dialogue_51"
 
 [node name="T52" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -872, -264 )
 rotation = -3.14159
 scale = Vector2( 13.3052, 1.72189 )
+DialogueKey = "dialogue_52"
 
 [node name="T53" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -870, -316 )
 rotation = -3.14159
 scale = Vector2( 13.3052, 1.72189 )
+DialogueKey = "dialogue_53"
 
 [node name="T61" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -1571, -2352 )
 rotation = -3.14159
 scale = Vector2( 13.3052, 1.72189 )
+DialogueKey = "dialogue_61"
 
 [node name="T62" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -1569, -2407 )
 rotation = -3.14159
 scale = Vector2( 13.3052, 1.72189 )
+DialogueKey = "dialogue_62"
 
 [node name="T63" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -1565, -2462 )
 rotation = -3.14159
 scale = Vector2( 13.3052, 1.72189 )
+DialogueKey = "dialogue_63"
 
 [node name="getback_1" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -725, 313 )
 rotation = -3.14159
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_5"
 
 [node name="getback_2" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1638, 564 )
 rotation = -3.14159
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_5"
 
 [node name="getback_3" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -1628, -114 )
 rotation = -4.71238
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_5"
 
 [node name="getback_5" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -2427, -2207 )
 rotation = -4.71238
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_5"
 
 [node name="getback_6" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 4005, -1887 )
 rotation = -4.71238
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_5"
 
 [node name="getback_7" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 3948, -3391 )
 rotation = -4.71238
 scale = Vector2( 1.3242, 13.56 )
+DialogueKey = "dialogue_5"
 
 [node name="getback_8" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 3690, -4258 )
 rotation = -4.71238
 scale = Vector2( 16.5603, 27.5147 )
+DialogueKey = "dialogue_6"
 
 [node name="getback_9" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -2524, -5691 )
 rotation = -4.71238
 scale = Vector2( 16.5603, 25.4764 )
+DialogueKey = "dialogue_6"
 
 [node name="getback_10" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -2722, -6857 )
 rotation = -4.71238
 scale = Vector2( 16.7861, 22.371 )
+DialogueKey = "dialogue_6"
 
 [node name="getback_4" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 2126, -1619 )
 rotation = -4.71238
 scale = Vector2( 6.1543, 2.38446 )
+DialogueKey = "dialogue_5"
 
 [node name="batt_msg_1" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1053, -399 )
 rotation = -1.5708
 scale = Vector2( 15.7962, -14.5472 )
+DialogueKey = "dialogue_1"
 
 [node name="batt_msg_2" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -5.99999, -415 )
 rotation = -1.5708
 scale = Vector2( 11.1732, -14.9688 )
+DialogueKey = "dialogue_1"
 
 [node name="batt_msg_3" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -1028, -956 )
 rotation = -1.5708
 scale = Vector2( 13.7593, -6.0384 )
+DialogueKey = "dialogue_1"
 
 [node name="correct_msg_1" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -1805, -1326 )
 rotation = -1.5708
 scale = Vector2( 9.19144, -8.73625 )
+DialogueKey = "dialogue_4"
 
 [node name="correct_msg_2" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 1014, -1726 )
 rotation = -1.5708
 scale = Vector2( 9.19144, -8.73625 )
+DialogueKey = "dialogue_4"
 
 [node name="correct_msg_3" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 2653, -3326 )
 rotation = -1.5708
 scale = Vector2( 12.7306, -14.99 )
+DialogueKey = "dialogue_4"
 
 [node name="correct_msg_4" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -2223, -3671 )
 rotation = -1.5708
 scale = Vector2( 12.7306, -14.99 )
+DialogueKey = "dialogue_4"
 
 [node name="correct_msg_5" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( -209, -5618 )
 rotation = -1.5708
 scale = Vector2( 12.7306, -14.99 )
+DialogueKey = "dialogue_3"
 
 [node name="correct_msg_6" parent="DialogueTriggers" instance=ExtResource( 5 )]
 position = Vector2( 3402, -7288 )
 rotation = -1.5708
 scale = Vector2( 12.7306, -14.99 )
+DialogueKey = "dialogue_2"
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
