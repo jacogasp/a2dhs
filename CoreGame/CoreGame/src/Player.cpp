@@ -12,6 +12,7 @@
 
 void Player::_ready() {
   m_initialPosition = get_position();
+  m_initialRotation = get_rotation();
   m_animatedSprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
   m_torch = get_node<Torch>("Torch");
   m_walkSoundPlayer = get_node<godot::AudioStreamPlayer>("WalkSoundPlayer");
@@ -50,6 +51,7 @@ void Player::_physics_process(const real_t p_delta) {
 
 void Player::resetPlayer() {
   set_position(m_initialPosition);
+  set_rotation(m_initialRotation);
   m_torch->full_charge();
 }
 
@@ -76,9 +78,9 @@ godot::Vector2 Player::get_direction() const {
 }
 
 void Player::_on_Player_area_entered(godot::Area2D *area) {
-  if (area->is_in_group("batteries")) {
+  if (area->is_in_group("batteries") and area->is_visible()) {
     m_torch->full_charge();
-    area->queue_free();
+    area->hide();
   } else if (area->is_in_group("dialogues")) {
     if (m_showDialogueCallback) {
       auto trigger = godot::Object::cast_to<DialogueTrigger>(area);

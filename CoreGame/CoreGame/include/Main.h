@@ -5,6 +5,7 @@
 #ifndef COREGAME_MAIN_H
 #define COREGAME_MAIN_H
 
+#include <Array.hpp>
 #include <CanvasModulate.hpp>
 #include <Dictionary.hpp>
 #include <Godot.hpp>
@@ -24,6 +25,7 @@ class Main : public godot::Node2D {
   HUD *m_hud = nullptr;
   bool m_firstGame = true;
   bool m_gameOver = false;
+  godot::Array m_batteries;
 
 public:
   void _init() {}

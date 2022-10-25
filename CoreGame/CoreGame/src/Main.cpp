@@ -48,6 +48,7 @@ void Main::_ready() {
   m_hud->hideGameOver();
   m_hud->hideDialogue();
   if (!m_darknessLayer->is_visible()) m_darknessLayer->set_visible(true);
+  m_batteries = get_tree()->get_nodes_in_group("batteries");
 
   godot::Godot::print("Main scene ready");
 }
@@ -61,6 +62,10 @@ void Main::gameOver() {
 }
 
 void Main::resetGame() {
+  for (int i = 0; i < m_batteries.size(); ++i) {
+    godot::Node2D *battery = m_batteries[i];
+    battery->show();
+  }
   m_player->resetPlayer();
   m_player->enableInteraction();
   m_hud->hideGameOver();
@@ -91,7 +96,7 @@ void Main::_input() {
 
     if (m_gameOver) {
       resetGame();
-      get_tree()->reload_current_scene();
+//      get_tree()->reload_current_scene();
       return;
     }
 
