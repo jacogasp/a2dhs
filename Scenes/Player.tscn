@@ -103,7 +103,7 @@ shape = SubResource( 8 )
 position = Vector2( 2.66669, 9.33331 )
 batteryLifeTime = 20.0
 
-[node name="WalkSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="WalkSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 40 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Player_area_entered"]
