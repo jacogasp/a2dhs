@@ -8,6 +8,7 @@
 #include "CoreMath.h"
 #include <AnimatedSprite.hpp>
 #include <Area2D.hpp>
+#include <AudioStreamPlayer2D.hpp>
 #include <CollisionShape2D.hpp>
 #include <Godot.hpp>
 #include <Input.hpp>
@@ -27,6 +28,7 @@ class Player : public godot::KinematicBody2D {
   godot::Vector2 m_velocity{};
   godot::Vector2 m_acceleration{};
   godot::AnimatedSprite *m_animatedSprite = nullptr;
+  godot::AudioStreamPlayer2D *m_walkSoundPlayer = nullptr;
   Torch *m_torch = nullptr;
   bool m_userInteractionEnabled = true;
   std::function<void(void)> m_onBatteryRunOut;
