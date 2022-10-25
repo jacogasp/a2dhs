@@ -78,7 +78,7 @@ godot::Vector2 Player::get_direction() const {
 }
 
 void Player::_on_Player_area_entered(godot::Area2D *area) {
-  if (area->is_in_group("batteries") and area->is_visible()) {
+  if (area->is_in_group("batteries") && area->is_visible()) {
     m_torch->full_charge();
     area->hide();
   } else if (area->is_in_group("dialogues")) {
