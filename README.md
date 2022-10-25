@@ -1,6 +1,6 @@
-# A 2D Horror Story
+# A Pixel Horror Story
 
-![Build status](https://github.com/jacogasp/a2dhs/actions/workflows/build.yml/badge.svg)
+![Build status](https://github.com/jacogasp/aphs/actions/workflows/build.yml/badge.svg)
 
 Sources: 
 - [https://thatonegamedev.com/cpp/godot-native-using-cmake/](https://thatonegamedev.com/cpp/godot-native-using-cmake/)
