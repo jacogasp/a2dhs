@@ -11,7 +11,8 @@ void Player::_ready() {
   m_initialPosition = get_position();
   m_animatedSprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
   m_torch = get_node<Torch>("Torch");
-  m_animatedSprite->set_animation("walk");
+  m_animatedSprite->set_animation("idle");
+  m_animatedSprite->play();
   m_torch->setOnBatterRunOutCallback([&]() { m_onBatteryRunOut(); });
   godot::Godot::print("Player ready");
 }
@@ -20,7 +21,7 @@ std::ostream &operator<<(std::ostream &os, const godot::Vector2 &v) { return os 
 
 void Player::_physics_process(const real_t p_delta) {
   if (!m_userInteractionEnabled) {
-    m_animatedSprite->stop();
+    m_animatedSprite->set_animation("idle");
     return;
   }
   auto input = godot::Input::get_singleton();
@@ -28,14 +29,14 @@ void Player::_physics_process(const real_t p_delta) {
   velocity.x = input->get_action_strength("move_right") - input->get_action_strength("move_left");
   velocity.y = input->get_action_strength("move_down") - input->get_action_strength("move_up");
   float inputMagnitude = std::clamp(velocity.length(), 0.0f, 1.0f);
-  auto collision = move_and_collide(velocity * speed * inputMagnitude * p_delta);
+  move_and_collide(velocity * speed * inputMagnitude * p_delta);
 
   if (velocity.length() > 0.0f) {
     float angle = velocity.angle();
-    m_animatedSprite->play();
+    m_animatedSprite->set_animation("run");
     set_global_rotation(godot::Math::lerp_angle(get_global_rotation(), angle, rotation_weight));
   } else {
-    m_animatedSprite->stop();
+    m_animatedSprite->set_animation("idle");
   }
 }
 
