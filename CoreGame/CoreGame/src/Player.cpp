@@ -5,17 +5,22 @@
 #include <algorithm>
 #include <iostream>
 
+#include <AudioStream.hpp>
+#include <AudioStreamSample.hpp>
+
 #include "DialogueTrigger.h"
 
 void Player::_ready() {
   m_initialPosition = get_position();
   m_animatedSprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
   m_torch = get_node<Torch>("Torch");
-  m_walkSoundPlayer = get_node<godot::AudioStreamPlayer2D>("WalkSoundPlayer");
+  m_walkSoundPlayer = get_node<godot::AudioStreamPlayer>("WalkSoundPlayer");
   m_animatedSprite->set_animation("idle");
   m_animatedSprite->play();
   m_torch->setOnBatterRunOutCallback([&]() { m_onBatteryRunOut(); });
   godot::Godot::print("Player ready");
+  godot::Ref<godot::AudioStreamSample> stream = m_walkSoundPlayer->get_stream();
+  //    stream->set_loop_mode(godot::AudioStreamSample::LoopMode::LOOP_FORWARD);
 }
 
 std::ostream &operator<<(std::ostream &os, const godot::Vector2 &v) { return os << "x: " << v.x << ", y: " << v.y; }
@@ -35,11 +40,11 @@ void Player::_physics_process(const real_t p_delta) {
   if (velocity.length() > 0.0f) {
     float angle = velocity.angle();
     m_animatedSprite->set_animation("run");
-    if (!m_walkSoundPlayer->is_playing()) m_walkSoundPlayer->play();
+    if (!m_walkSoundPlayer->is_playing()) playWalkingSound();
     set_global_rotation(godot::Math::lerp_angle(get_global_rotation(), angle, rotation_weight));
   } else {
     m_animatedSprite->set_animation("idle");
-    m_walkSoundPlayer->stop();
+    stopWalkingSound();
   }
 }
 
@@ -48,11 +53,18 @@ void Player::resetPlayer() {
   m_torch->full_charge();
 }
 
+void Player::playWalkingSound() { m_walkSoundPlayer->play(); }
+
+void Player::stopWalkingSound() {
+  godot::Ref<godot::AudioStreamSample> stream = m_walkSoundPlayer->get_stream();
+  stream->set_loop_mode(godot::AudioStreamSample::LoopMode::LOOP_DISABLED);
+}
+
 void Player::setUserInteraction(bool enabled) {
   m_userInteractionEnabled = enabled;
   if (enabled) m_torch->resume();
   else {
-    m_walkSoundPlayer->stop();
+    stopWalkingSound();
     m_torch->pause();
   }
 }
