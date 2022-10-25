@@ -2,8 +2,8 @@
 // Created by Jacopo Gasparetto on 04/09/22.
 //
 
-#ifndef A2DHS_VISIBILITYPOLYGON_H
-#define A2DHS_VISIBILITYPOLYGON_H
+#ifndef COREGAME_VISIBILITYPOLYGON_H
+#define COREGAME_VISIBILITYPOLYGON_H
 
 #include <Godot.hpp>
 #include <Gradient.hpp>
@@ -53,4 +53,4 @@ public:
   static void _register_methods();
 };
 
-#endif // A2DHS_VISIBILITYPOLYGON_H
+#endif // COREGAME_VISIBILITYPOLYGON_H

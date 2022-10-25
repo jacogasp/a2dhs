@@ -2,8 +2,8 @@
 // Created by Jacopo Gasparetto on 04/09/22.
 //
 
-#ifndef A2DHS_MAP_H
-#define A2DHS_MAP_H
+#ifndef COREGAME_MAP_H
+#define COREGAME_MAP_H
 
 #include <Area2D.hpp>
 #include <Array.hpp>
@@ -29,4 +29,4 @@ public:
   static void _register_methods();
 };
 
-#endif // A2DHS_MAP_H
+#endif // COREGAME_MAP_H
