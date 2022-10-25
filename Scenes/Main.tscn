@@ -72,7 +72,7 @@ position = Vector2( 3547, -5019 )
 position = Vector2( -229, -5331 )
 
 [node name="Battery29" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -863, -6275 )
+position = Vector2( 1426, -6891 )
 
 [node name="Battery25" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 1795, -4300 )
