@@ -101,7 +101,7 @@ shape = SubResource( 8 )
 
 [node name="Torch" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2.66669, 9.33331 )
-batteryLifeTime = 45.0
+batteryLifeTime = 40.0
 
 [node name="WalkSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 40 )
