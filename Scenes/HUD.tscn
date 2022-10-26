@@ -53,18 +53,6 @@ autowrap = true
 [node name="GameOver" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="TheyCaughtYouLabel" type="Label" parent="GameOver"]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -108.0
-margin_right = 1.0
-margin_bottom = -76.0
-custom_fonts/font = SubResource( 3 )
-text = "They caught you."
-align = 1
-autowrap = true
-
 [node name="GameOverLabel" type="Label" parent="GameOver"]
 anchor_top = 0.5
 anchor_right = 1.0
@@ -74,6 +62,18 @@ margin_right = 1.0
 margin_bottom = -140.0
 custom_fonts/font = SubResource( 2 )
 text = "Game Over"
+align = 1
+autowrap = true
+
+[node name="TheyCaughtYouLabel" type="Label" parent="GameOver"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -108.0
+margin_right = 1.0
+margin_bottom = -76.0
+custom_fonts/font = SubResource( 3 )
+text = "They caught you."
 align = 1
 autowrap = true
 
@@ -89,8 +89,46 @@ text = "Press Enter/Space to try again"
 align = 1
 autowrap = true
 
-[node name="Dialogue" type="Sprite" parent="."]
+[node name="GameCompleted" type="CanvasLayer" parent="."]
 visible = false
+
+[node name="Escaped!" type="Label" parent="GameCompleted"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -204.0
+margin_right = 1.0
+margin_bottom = -140.0
+custom_fonts/font = SubResource( 2 )
+text = "You escaped!"
+align = 1
+autowrap = true
+
+[node name="Done" type="Label" parent="GameCompleted"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -108.0
+margin_right = 1.0
+margin_bottom = -76.0
+custom_fonts/font = SubResource( 3 )
+text = "You're done! The last colony is not that far from here, everything will be fine darlin'."
+align = 1
+autowrap = true
+
+[node name="TryAgainLabel" type="Label" parent="GameCompleted"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 124.0
+margin_right = 1.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 3 )
+text = "Press Enter/Space to try again"
+align = 1
+autowrap = true
+
+[node name="Dialogue" type="Sprite" parent="."]
 position = Vector2( 512, 520 )
 scale = Vector2( 0.6375, 0.6375 )
 texture = ExtResource( 3 )
@@ -99,10 +137,10 @@ texture = ExtResource( 3 )
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -614.0
-margin_top = -105.0
-margin_right = -439.0
-margin_bottom = -38.0
+margin_left = -626.0
+margin_top = -140.0
+margin_right = -422.0
+margin_bottom = -21.0
 rect_scale = Vector2( 0.79381, 1.02413 )
 rect_pivot_offset = Vector2( 176, 104 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
