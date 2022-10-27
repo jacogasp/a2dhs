@@ -33,7 +33,7 @@ public:
   void resetGame();
   void displayDialogue(const godot::String &dialogueKey) const;
   void _on_dialogue(godot::NodePath nodePath);
-  void _on_battery_run_out();
+  void win();
   static void _register_methods();
 };
 

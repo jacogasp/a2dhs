@@ -18,16 +18,17 @@ class HUD : public godot::CanvasLayer {
   godot::Label *_messageLabel;
   godot::CanvasLayer *_startGameHUD;
   godot::CanvasLayer *_gameOverHUD;
-  bool m_dialogue_visible = false;
+  godot::CanvasLayer *_gameCompletedHUD;
 
 public:
   void _init() {}
   void _ready();
-  bool is_dialogue_visible() const { return m_dialogue_visible; }
   void showStart();
   void hideStart();
   void showGameOver();
   void hideGameOver();
+  void showGameCompleted();
+  void hideGameCompleted();
   void displayDialogue(const godot::String &message);
   void hideDialogue();
   static void _register_methods();

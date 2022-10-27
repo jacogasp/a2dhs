@@ -270,5 +270,6 @@ scale = Vector2( 30.84, 4.68 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
 shape = SubResource( 1 )
 
-[connection signal="battery_run_out" from="Player" to="." method="_on_battery_run_out"]
+[connection signal="battery_run_out" from="Player" to="." method="gameOver"]
 [connection signal="on_dialogue" from="Player" to="." method="_on_dialogue"]
+[connection signal="player_exited" from="Player" to="." method="win"]

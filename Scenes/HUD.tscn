@@ -129,6 +129,7 @@ align = 1
 autowrap = true
 
 [node name="Dialogue" type="Sprite" parent="."]
+visible = false
 position = Vector2( 512, 520 )
 scale = Vector2( 0.6375, 0.6375 )
 texture = ExtResource( 3 )

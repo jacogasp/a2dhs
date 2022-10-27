@@ -82,11 +82,10 @@ void Player::_on_Player_area_entered(godot::Area2D *area) {
   if (area->is_in_group("batteries") && area->is_visible()) {
     m_torch->full_charge();
     area->hide();
-  } else if (area->is_in_group("exits")) {
-    emit_signal("player_exited");
-  } else if (area->is_in_group("dialogues")) {
-    emit_signal("on_dialogue", area->get_path());
   }
+  else if (area->is_in_group("exits")) emit_signal("player_exited");
+  else if (area->is_in_group("dialogues")) emit_signal("on_dialogue", area->get_path());
+  else if (area->is_in_group("exits")) emit_signal("exit_success");
 }
 
 void Player::_register_methods() {
@@ -95,8 +94,9 @@ void Player::_register_methods() {
   godot::register_method("_ready", &Player::_ready);
   godot::register_method("_physics_process", &Player::_physics_process);
   godot::register_method("_on_Player_area_entered", &Player::_on_Player_area_entered);
+  godot::register_method("_on_battery_run_out", &Player::_on_battery_run_out);
   godot::register_signal<Player>("player_exited");
   godot::register_signal<Player>("on_dialogue", "string", GODOT_VARIANT_TYPE_NODE_PATH);
-  godot::register_method("_on_battery_run_out", &Player::_on_battery_run_out);
   godot::register_signal<Player>("battery_run_out");
+  godot::register_signal<Player>("exit_success");
 }

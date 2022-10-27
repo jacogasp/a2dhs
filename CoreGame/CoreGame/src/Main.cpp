@@ -45,11 +45,18 @@ void Main::_ready() {
   m_hud->showStart();
   m_hud->hideGameOver();
   m_hud->hideDialogue();
+  m_hud->hideGameCompleted();
   if (!m_darknessLayer->is_visible()) m_darknessLayer->set_visible(true);
   godot::Godot::print("Main scene ready");
 }
 
 void Main::_process() {}
+
+void Main::win() {
+  m_gameOver = true;
+  m_hud->showGameCompleted();
+  m_player->disableInteraction();
+}
 
 void Main::gameOver() {
   m_gameOver = true;
@@ -62,6 +69,7 @@ void Main::resetGame() {
   m_player->resetPlayer();
   m_player->enableInteraction();
   m_hud->hideGameOver();
+  m_hud->hideGameCompleted();
   m_gameOver = false;
 }
 
@@ -106,14 +114,11 @@ void Main::_on_dialogue(godot::NodePath nodePath) {
   }
 }
 
-void Main::_on_battery_run_out() {
-  gameOver();
-}
-
 void Main::_register_methods() {
   godot::register_method("_ready", &Main::_ready);
   godot::register_method("_process", &Main::_process);
   godot::register_method("_input", &Main::_input);
   godot::register_method("_on_dialogue", &Main::_on_dialogue);
-  godot::register_method("_on_battery_run_out", &Main::_on_battery_run_out);
+  godot::register_method("gameOver", &Main::gameOver);
+  godot::register_method("win", &Main::win);
 }
