@@ -39,7 +39,7 @@
 [ext_resource path="res://Assets/Animations/Idle/PiGigi_Idle_24x24_Frames_V.1-9.png" type="Texture" id=37]
 [ext_resource path="res://Assets/Animations/Idle/PiGigi_Idle_24x24_Frames_V.1-12.png" type="Texture" id=38]
 [ext_resource path="res://Assets/Animations/Idle/PiGigi_Idle_24x24_Frames_V.1-13.png" type="Texture" id=39]
-[ext_resource path="res://Audio/walking.wav" type="AudioStream" id=40]
+[ext_resource path="res://Audio/footsteps.wav" type="AudioStream" id=40]
 
 [sub_resource type="CanvasItemMaterial" id=7]
 light_mode = 1
@@ -105,6 +105,8 @@ batteryLifeTime = 40.0
 
 [node name="WalkSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 40 )
+volume_db = -14.768
+pitch_scale = 1.2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Player_area_entered"]
 [connection signal="battery_run_out" from="Torch" to="." method="_on_battery_run_out"]
