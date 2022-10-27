@@ -135,13 +135,13 @@ position = Vector2( -876, -456 )
 
 [node name="StoryDialogues" type="Node" parent="DialogueTriggers"]
 
-[node name="T12" parent="DialogueTriggers/StoryDialogues" instance=ExtResource( 5 )]
+[node name="T12" parent="DialogueTriggers/StoryDialogues" groups=["storytelling"] instance=ExtResource( 5 )]
 position = Vector2( 540, 596 )
 rotation = -1.5708
 scale = Vector2( 1.30912, 11.28 )
 DialogueKey = "dialogue_12"
 
-[node name="T20" parent="DialogueTriggers/StoryDialogues" instance=ExtResource( 5 )]
+[node name="T20" parent="DialogueTriggers/StoryDialogues" groups=["storytelling"] instance=ExtResource( 5 )]
 position = Vector2( 573, -534 )
 rotation = -1.5708
 scale = Vector2( 10.3304, 12.8069 )

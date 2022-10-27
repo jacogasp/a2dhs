@@ -110,7 +110,7 @@ void Main::_on_dialogue(godot::NodePath nodePath) {
   auto trigger = get_node<DialogueTrigger>(nodePath);
   if (trigger) {
     displayDialogue(trigger->dialogueKey);
-    trigger->queue_free();
+    if (trigger->is_in_group("storytelling")) trigger->queue_free();
   }
 }
 
