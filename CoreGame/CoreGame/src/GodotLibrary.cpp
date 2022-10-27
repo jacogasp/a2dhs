@@ -14,6 +14,8 @@ using namespace godot;
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) { Godot::gdnative_init(o); }
 
 extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_options *o) {
+  // Crash on quit calling get_tree() https://github.com/godotengine/godot/issues/48295#issuecomment-981404421
+  Godot::nativescript_terminate(godot::_RegisterState::nativescript_handle);
   Godot::gdnative_terminate(o);
 }
 
