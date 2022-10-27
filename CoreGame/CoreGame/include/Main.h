@@ -10,8 +10,7 @@
 #include <Godot.hpp>
 #include <InputEvent.hpp>
 #include <Node2D.hpp>
-
-#include <functional>
+#include <NodePath.hpp>
 
 #include "HUD.h"
 #include "Player.h"
@@ -33,6 +32,8 @@ public:
   void gameOver();
   void resetGame();
   void displayDialogue(const godot::String &dialogueKey) const;
+  void _on_dialogue(godot::NodePath nodePath);
+  void _on_battery_run_out();
   static void _register_methods();
 };
 

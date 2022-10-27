@@ -107,3 +107,4 @@ batteryLifeTime = 40.0
 stream = ExtResource( 40 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Player_area_entered"]
+[connection signal="battery_run_out" from="Torch" to="." method="_on_battery_run_out"]

@@ -24,6 +24,7 @@ void Torch::_register_methods() {
   godot::register_property("maxAnimationDelayTime", &Torch::maxAnimationDelayTime, k_maxAnimationDelayTime);
   godot::register_method("_ready", &Torch::_ready);
   godot::register_method("_process", &Torch::_process);
+  godot::register_signal<Torch>("battery_run_out");
 }
 
 void Torch::get_nodes() {
@@ -48,7 +49,7 @@ void Torch::_process(real_t delta) {
   if (m_intensity <= 0.75f && !m_animationAutoPlaying) startAnimation();
 
   if (m_intensity <= 0.1f) {
-    if (m_onBatteryRunOut) m_onBatteryRunOut();
+    emit_signal("battery_run_out");
     pause();
   }
 }

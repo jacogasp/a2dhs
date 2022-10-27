@@ -9,7 +9,6 @@
 #include "Light2D.hpp"
 #include "Node2D.hpp"
 #include "Timer.hpp"
-#include <functional>
 #include <iostream>
 #include <random>
 #include <string>
@@ -42,7 +41,6 @@ class Torch : public godot::Node2D {
   float m_currentEnergy{0.f};
   float m_batteryCurrentTime{0.0f};
   bool m_isPaused = false;
-  std::function<void(void)> m_onBatteryRunOut;
 
   void get_nodes();
 
@@ -70,7 +68,6 @@ public:
   [[nodiscard]] inline int batteryCharge() const;
   inline void printBatteryCharge() const;
   void discharge(real_t t);
-  void setOnBatterRunOutCallback(const std::function<void(void)> &&callback) { m_onBatteryRunOut = callback; }
   void full_charge();
   void pause();
   void resume();

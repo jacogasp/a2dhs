@@ -18,7 +18,6 @@ void Player::_ready() {
   m_walkSoundPlayer = get_node<godot::AudioStreamPlayer>("WalkSoundPlayer");
   m_animatedSprite->set_animation("idle");
   m_animatedSprite->play();
-  m_torch->setOnBatterRunOutCallback([&]() { m_onBatteryRunOut(); });
   godot::Godot::print("Player ready");
   godot::Ref<godot::AudioStreamSample> stream = m_walkSoundPlayer->get_stream();
   //    stream->set_loop_mode(godot::AudioStreamSample::LoopMode::LOOP_FORWARD);
@@ -77,16 +76,16 @@ godot::Vector2 Player::get_direction() const {
   return v;
 }
 
+void Player::_on_battery_run_out() { emit_signal("battery_run_out"); }
+
 void Player::_on_Player_area_entered(godot::Area2D *area) {
   if (area->is_in_group("batteries") && area->is_visible()) {
     m_torch->full_charge();
     area->hide();
+  } else if (area->is_in_group("exits")) {
+    emit_signal("player_exited");
   } else if (area->is_in_group("dialogues")) {
-    if (m_showDialogueCallback) {
-      auto trigger = godot::Object::cast_to<DialogueTrigger>(area);
-      m_showDialogueCallback(trigger->dialogueKey);
-      area->queue_free();
-    }
+    emit_signal("on_dialogue", area->get_path());
   }
 }
 
@@ -96,4 +95,8 @@ void Player::_register_methods() {
   godot::register_method("_ready", &Player::_ready);
   godot::register_method("_physics_process", &Player::_physics_process);
   godot::register_method("_on_Player_area_entered", &Player::_on_Player_area_entered);
+  godot::register_signal<Player>("player_exited");
+  godot::register_signal<Player>("on_dialogue", "string", GODOT_VARIANT_TYPE_NODE_PATH);
+  godot::register_method("_on_battery_run_out", &Player::_on_battery_run_out);
+  godot::register_signal<Player>("battery_run_out");
 }

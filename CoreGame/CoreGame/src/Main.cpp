@@ -3,6 +3,7 @@
 //
 
 #include "Main.h"
+#include "DialogueTrigger.h"
 #include <File.hpp>
 #include <Input.hpp>
 #include <JSON.hpp>
@@ -40,9 +41,6 @@ void Main::_ready() {
   m_player = get_node<Player>("Player");
   m_hud = get_node<HUD>("HUD");
   m_darknessLayer = get_node<godot::CanvasModulate>("Darkness");
-
-  m_player->setOnShowDialogueCallback([&](const godot::String &dialogueKey) { displayDialogue(dialogueKey); });
-  m_player->setOnBatterRunOutCallback([&]() { gameOver(); });
   m_player->disableInteraction();
   m_hud->showStart();
   m_hud->hideGameOver();
@@ -99,8 +97,23 @@ void Main::_input() {
   }
 }
 
+void Main::_on_dialogue(godot::NodePath nodePath) {
+  godot::Godot::print(nodePath);
+  auto trigger = get_node<DialogueTrigger>(nodePath);
+  if (trigger) {
+    displayDialogue(trigger->dialogueKey);
+    trigger->queue_free();
+  }
+}
+
+void Main::_on_battery_run_out() {
+  gameOver();
+}
+
 void Main::_register_methods() {
   godot::register_method("_ready", &Main::_ready);
   godot::register_method("_process", &Main::_process);
   godot::register_method("_input", &Main::_input);
+  godot::register_method("_on_dialogue", &Main::_on_dialogue);
+  godot::register_method("_on_battery_run_out", &Main::_on_battery_run_out);
 }
