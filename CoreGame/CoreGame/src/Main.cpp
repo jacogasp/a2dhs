@@ -46,7 +46,7 @@ void Main::_ready() {
   m_hud->hideGameOver();
   m_hud->hideDialogue();
   m_hud->hideGameCompleted();
-  if (!m_darknessLayer->is_visible()) m_darknessLayer->set_visible(true);
+//  if (!m_darknessLayer->is_visible()) m_darknessLayer->set_visible(true);
   godot::Godot::print("Main scene ready");
 }
 

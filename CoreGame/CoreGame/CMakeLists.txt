@@ -11,6 +11,7 @@ add_library(
         include/Main.h src/Main.cpp
         include/Map.h src/Map.cpp
         include/Torch.h src/Torch.cpp
+        include/RedEyesSpawner.h src/RedEyesSpawner.cpp
         include/CoreMath.h
         include/VisibilityPolygon.h src/VisibilityPolygon.cpp
         include/Timer.h)

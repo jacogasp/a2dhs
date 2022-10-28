@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "Mob.h"
 #include "Player.h"
+#include "RedEyesSpawner.h"
 #include "Torch.h"
 #include "VisibilityPolygon.h"
 #include <Godot.hpp>
@@ -27,6 +28,8 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void *handle) {
   register_class<Main>();
   register_class<HUD>();
   register_class<Map>();
+  register_class<RedEyes>();
+  register_class<RedEyesSpawner>();
   register_class<VisibilityPolygon>();
   register_class<Torch>();
   register_class<DialogueTrigger>();

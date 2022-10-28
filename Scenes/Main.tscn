@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Battery.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/DialogueTrigger.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/RedEyesSpawner.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -24,6 +25,11 @@ rotation = -1.5708
 scale = Vector2( 0.999811, 1 )
 collision_mask = 1
 speed = 200.0
+
+[node name="RedEyesSpawner" parent="Player" instance=ExtResource( 7 )]
+position = Vector2( 638.123, -548.998 )
+rotation = 1.5708
+scale = Vector2( 1, 1.00019 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 position = Vector2( -6.10352e-05, 3 )
