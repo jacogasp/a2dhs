@@ -231,24 +231,6 @@ rotation = -1.5708
 scale = Vector2( 9.19144, -8.73625 )
 DialogueKey = "dialogue_4"
 
-[node name="correct_msg_2" parent="DialogueTriggers/CorrectMsg" instance=ExtResource( 5 )]
-position = Vector2( 1014, -1726 )
-rotation = -1.5708
-scale = Vector2( 9.19144, -8.73625 )
-DialogueKey = "dialogue_4"
-
-[node name="correct_msg_3" parent="DialogueTriggers/CorrectMsg" instance=ExtResource( 5 )]
-position = Vector2( 2653, -3326 )
-rotation = -1.5708
-scale = Vector2( 12.7306, -14.99 )
-DialogueKey = "dialogue_4"
-
-[node name="correct_msg_4" parent="DialogueTriggers/CorrectMsg" instance=ExtResource( 5 )]
-position = Vector2( -2223, -3671 )
-rotation = -1.5708
-scale = Vector2( 12.7306, -14.99 )
-DialogueKey = "dialogue_4"
-
 [node name="correct_msg_5" parent="DialogueTriggers/CorrectMsg" instance=ExtResource( 5 )]
 position = Vector2( -209, -5618 )
 rotation = -1.5708
