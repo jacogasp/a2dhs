@@ -48,40 +48,31 @@ smoothing_enabled = true
 position = Vector2( 557, -38 )
 
 [node name="Battery4" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 0, -416 )
+position = Vector2( -451, 46 )
 
 [node name="Battery5" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 1055, -403 )
-
-[node name="Battery6" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -875, 457 )
+position = Vector2( 1055, -839 )
 
 [node name="Battery7" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( -1895, -34 )
-
-[node name="Battery8" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 1724, 540 )
 
 [node name="Battery9" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 2161, 60 )
 
 [node name="Battery10" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 3064, -722 )
+position = Vector2( 3494, -812 )
 
 [node name="Battery17" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 2776, -1892 )
-
-[node name="Battery18" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 3022, -2837 )
 
 [node name="Battery19" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 3547, -5019 )
 
 [node name="Battery20" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -229, -5331 )
+position = Vector2( -216, -6042 )
 
 [node name="Battery29" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 1426, -6891 )
+position = Vector2( 3153, -6904 )
 
 [node name="Battery25" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 1795, -4300 )
@@ -98,29 +89,17 @@ position = Vector2( -2220, -4660 )
 [node name="Battery32" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( -1483, -7596 )
 
-[node name="Battery28" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -2698, -6565 )
-
-[node name="Battery23" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -176, -7374 )
-
-[node name="Battery24" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 3196, -6974 )
-
 [node name="Battery11" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 1513, -810 )
+position = Vector2( 2136, -1806 )
 
 [node name="Battery12" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( 1008, -1244 )
+position = Vector2( 1342, -2081 )
 
 [node name="Battery13" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( -129, -1456 )
 
 [node name="Battery33" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( 299, -2328 )
-
-[node name="Battery14" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -1037, -960 )
 
 [node name="Battery15" parent="Batteries" instance=ExtResource( 1 )]
 position = Vector2( -1799, -1973 )
@@ -135,7 +114,7 @@ position = Vector2( -751, -3248 )
 position = Vector2( 1585, -3195 )
 
 [node name="Battery16" parent="Batteries" instance=ExtResource( 1 )]
-position = Vector2( -876, -456 )
+position = Vector2( -815, -994 )
 
 [node name="DialogueTriggers" type="Node" parent="."]
 
@@ -147,6 +126,12 @@ rotation = -1.5708
 scale = Vector2( 1.30912, 11.28 )
 DialogueKey = "dialogue_12"
 
+[node name="T13" parent="DialogueTriggers/StoryDialogues" groups=["storytelling"] instance=ExtResource( 5 )]
+position = Vector2( 562, 14 )
+rotation = -1.5708
+scale = Vector2( 1.30912, 11.28 )
+DialogueKey = "dialogue_13"
+
 [node name="T20" parent="DialogueTriggers/StoryDialogues" groups=["storytelling"] instance=ExtResource( 5 )]
 position = Vector2( 573, -534 )
 rotation = -1.5708
@@ -155,87 +140,9 @@ DialogueKey = "dialogue_20"
 
 [node name="GetBackMsg" type="Node" parent="DialogueTriggers"]
 
-[node name="getback_1" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( -725, 313 )
-rotation = -3.14159
-scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_5"
-
-[node name="getback_2" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( 1638, 564 )
-rotation = -3.14159
-scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_5"
-
-[node name="getback_3" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( -1628, -114 )
-rotation = 1.57081
-scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_5"
-
-[node name="getback_5" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( -2427, -2207 )
-rotation = 1.57081
-scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_5"
-
-[node name="getback_6" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( 4005, -1887 )
-rotation = 1.57081
-scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_5"
-
-[node name="getback_7" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( 3948, -3391 )
-rotation = 1.57081
-scale = Vector2( 1.3242, 13.56 )
-DialogueKey = "dialogue_5"
-
-[node name="getback_8" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( 3690, -4258 )
-rotation = 1.57081
-scale = Vector2( 16.5603, 27.5147 )
-DialogueKey = "dialogue_6"
-
-[node name="getback_9" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( -2524, -5691 )
-rotation = 1.57081
-scale = Vector2( 16.5603, 25.4764 )
-DialogueKey = "dialogue_6"
-
-[node name="getback_10" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( -2722, -6857 )
-rotation = 1.57081
-scale = Vector2( 16.7861, 22.371 )
-DialogueKey = "dialogue_6"
-
-[node name="getback_4" parent="DialogueTriggers/GetBackMsg" instance=ExtResource( 5 )]
-position = Vector2( 2126, -1619 )
-rotation = 1.57081
-scale = Vector2( 6.1543, 2.38446 )
-DialogueKey = "dialogue_5"
-
 [node name="BatteryMsg" type="Node" parent="DialogueTriggers"]
 
-[node name="batt_msg_1" parent="DialogueTriggers/BatteryMsg" instance=ExtResource( 5 )]
-position = Vector2( 559, -47 )
-rotation = -1.5708
-scale = Vector2( 15.7962, -14.5472 )
-DialogueKey = "dialogue_1"
-
-[node name="batt_msg_3" parent="DialogueTriggers/BatteryMsg" instance=ExtResource( 5 )]
-position = Vector2( -1028, -956 )
-rotation = -1.5708
-scale = Vector2( 13.7593, -6.0384 )
-DialogueKey = "dialogue_1"
-
 [node name="CorrectMsg" type="Node" parent="DialogueTriggers"]
-
-[node name="correct_msg_1" parent="DialogueTriggers/CorrectMsg" instance=ExtResource( 5 )]
-position = Vector2( -1805, -1326 )
-rotation = -1.5708
-scale = Vector2( 9.19144, -8.73625 )
-DialogueKey = "dialogue_4"
 
 [node name="correct_msg_5" parent="DialogueTriggers/CorrectMsg" instance=ExtResource( 5 )]
 position = Vector2( -209, -5618 )
