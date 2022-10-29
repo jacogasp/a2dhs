@@ -91,6 +91,7 @@ void Player::_on_Player_area_entered(godot::Area2D *area) {
 void Player::_register_methods() {
   godot::register_property("speed", &Player::speed, (real_t)200.0f);
   godot::register_property("rotation_weight", &Player::rotation_weight, (real_t)0.5f);
+  godot::register_property("detection_radius", &Player::detection_radius, 45.0f);
   godot::register_method("_ready", &Player::_ready);
   godot::register_method("_physics_process", &Player::_physics_process);
   godot::register_method("_on_Player_area_entered", &Player::_on_Player_area_entered);

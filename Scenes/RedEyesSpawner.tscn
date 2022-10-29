@@ -6,8 +6,10 @@
 [node name="RedEyesSpawner" type="Node2D"]
 script = ExtResource( 1 )
 red_eys = ExtResource( 2 )
+SpawningRadius = 200.0
+SpawningSpread = 250.0
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.5
 
 [connection signal="timeout" from="SpawnTimer" to="." method="spawnTimeout"]

@@ -36,6 +36,7 @@ class Player : public godot::KinematicBody2D {
 public:
   real_t speed = 200.0f;
   real_t rotation_weight = 0.5f;
+  real_t detection_radius = 45;
   static void _register_methods();
 
   void _init(){};
@@ -47,6 +48,7 @@ public:
   void setUserInteraction(bool enabled);
   void enableInteraction() { setUserInteraction(true); }
   void disableInteraction() { setUserInteraction(false); }
+  [[nodiscard]] real_t getDetectionRadius() const { return detection_radius; }
 
   [[nodiscard]] godot::Vector2 get_direction() const;
   void _on_Player_area_entered(godot::Area2D *area);

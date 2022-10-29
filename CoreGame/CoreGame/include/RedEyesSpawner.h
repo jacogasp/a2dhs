@@ -19,6 +19,7 @@ class RedEyes : public godot::Node2D {
   GODOT_CLASS(RedEyes, godot::Node2D);
   godot::Timer *m_timer = nullptr;
   Player *m_player = nullptr;
+  float cos_theta = 0.0f;
 
 public:
   static void _register_methods();
@@ -34,6 +35,8 @@ class RedEyesSpawner : public godot::Node2D {
   godot::Ref<godot::RandomNumberGenerator> _random;
 
 public:
+  float radius = 160.0f;
+  float spread = 200.0f;
   godot::Ref<godot::PackedScene> redEyes;
   static void _register_methods();
   void _init(){};

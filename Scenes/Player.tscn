@@ -75,6 +75,7 @@ scale = Vector2( 0.75, 0.75 )
 collision_mask = 3
 script = ExtResource( 5 )
 speed = 150.0
+detection_radius = 90.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 7 )
