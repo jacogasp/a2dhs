@@ -17,13 +17,10 @@
 
 class RedEyes : public godot::Node2D {
   GODOT_CLASS(RedEyes, godot::Node2D);
-  godot::Sprite *m_sprite = nullptr;
   godot::Timer *m_timer = nullptr;
   Player *m_player = nullptr;
-//  godot::Vector2 *m_targetPosition = nullptr;
 
 public:
-
   static void _register_methods();
   void _init(){};
   void _ready();

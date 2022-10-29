@@ -3,6 +3,7 @@
 //
 
 #include "RedEyesSpawner.h"
+#include "CoreMath.h"
 #include <SceneTree.hpp>
 #include <cassert>
 
@@ -20,6 +21,11 @@ void RedEyes::_ready() {
 
 void RedEyes::_process() {
   assert(m_player);
+  auto direction = get_global_position() - m_player->get_global_position();
+  direction.normalize();
+  auto angle = direction.dot(m_player->get_direction());
+  if (angle > 0.8)
+    queue_free();
   this->look_at(m_player->get_global_position());
 }
 
@@ -41,10 +47,11 @@ void RedEyesSpawner::_ready() {
 
 void RedEyesSpawner::spawn() {
   godot::Node *red_eyes = redEyes->instance();
-  godot::Vector2 position{get_global_position()};
-  position.x += _random->randf() * 1280.0f;
-  position.y += _random->randf() * 600.0f;
-  red_eyes->set("global_position", position);
+  auto player = get_tree()->get_root()->get_node<Player>("MainScene/Player");
+  godot::Vector2 position{player->get_position()};
+  position.x +=  _random->randf() * 1024 - 512;
+  position.y += _random->randf() * 600 - 300;
+  red_eyes->set("position", position);
   get_parent()->get_parent()->add_child(red_eyes);
 }
 

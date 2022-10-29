@@ -37,16 +37,17 @@ void load_dialogues(const char *path, godot::Dictionary &d) {
 
 void Main::_ready() {
   load_dialogues("res://Assets/dialogues.json", m_dialogues);
-
   m_player = get_node<Player>("Player");
   m_hud = get_node<HUD>("HUD");
+  m_redEyesSpawner = get_node<RedEyesSpawner>("Player/RedEyesSpawner");
   m_darknessLayer = get_node<godot::CanvasModulate>("Darkness");
   m_player->disableInteraction();
   m_hud->showStart();
   m_hud->hideGameOver();
   m_hud->hideDialogue();
   m_hud->hideGameCompleted();
-//  if (!m_darknessLayer->is_visible()) m_darknessLayer->set_visible(true);
+  m_redEyesSpawner->stopSpawning();
+  if (!m_darknessLayer->is_visible()) m_darknessLayer->set_visible(true);
   godot::Godot::print("Main scene ready");
 }
 
@@ -56,12 +57,14 @@ void Main::win() {
   m_gameOver = true;
   m_hud->showGameCompleted();
   m_player->disableInteraction();
+  m_redEyesSpawner->stopSpawning();
 }
 
 void Main::gameOver() {
   m_gameOver = true;
   m_hud->showGameOver();
   m_player->disableInteraction();
+  m_redEyesSpawner->stopSpawning();
 }
 
 void Main::resetGame() {
@@ -70,6 +73,7 @@ void Main::resetGame() {
   m_player->enableInteraction();
   m_hud->hideGameOver();
   m_hud->hideGameCompleted();
+  m_redEyesSpawner->startSpawning();
   m_gameOver = false;
 }
 
@@ -92,6 +96,7 @@ void Main::_input() {
       m_firstGame = false;
       m_player->enableInteraction();
       m_hud->hideStart();
+      m_redEyesSpawner->startSpawning();
       return;
     }
 

@@ -14,6 +14,7 @@
 
 #include "HUD.h"
 #include "Player.h"
+#include "RedEyesSpawner.h"
 
 class Main : public godot::Node2D {
   GODOT_CLASS(Main, godot::Node2D)
@@ -21,6 +22,7 @@ class Main : public godot::Node2D {
   godot::Dictionary m_dialogues;
   Player *m_player = nullptr;
   HUD *m_hud = nullptr;
+  RedEyesSpawner *m_redEyesSpawner = nullptr;
   bool m_firstGame = true;
   bool m_gameOver = false;
 
