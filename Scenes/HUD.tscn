@@ -44,7 +44,7 @@ anchor_bottom = 0.5
 margin_top = 4.0
 margin_bottom = 106.0
 custom_fonts/font = SubResource( 3 )
-text = "Try to escape this lost town...
+text = "Try to escape this damned and lost town...
 don't let them catch you!"
 align = 1
 autowrap = true
@@ -118,19 +118,7 @@ text = "You escaped!"
 align = 1
 autowrap = true
 
-[node name="Done" type="Label" parent="GameCompleted"]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -108.0
-margin_right = 1.0
-margin_bottom = -76.0
-custom_fonts/font = SubResource( 3 )
-text = "The last colony is not that far from here, everything will be fine darlin'"
-align = 1
-autowrap = true
-
-[node name="TryAgainLabel" type="Label" parent="GameCompleted"]
+[node name="TryAgainLabel2" type="Label" parent="GameCompleted"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5

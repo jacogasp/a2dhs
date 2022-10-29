@@ -132,12 +132,6 @@ rotation = -1.5708
 scale = Vector2( 1.30912, 11.28 )
 DialogueKey = "dialogue_13"
 
-[node name="T20" parent="DialogueTriggers/StoryDialogues" groups=["storytelling"] instance=ExtResource( 5 )]
-position = Vector2( 573, -534 )
-rotation = -1.5708
-scale = Vector2( 10.3304, 12.8069 )
-DialogueKey = "dialogue_20"
-
 [node name="GetBackMsg" type="Node" parent="DialogueTriggers"]
 
 [node name="BatteryMsg" type="Node" parent="DialogueTriggers"]

@@ -1,13 +1,9 @@
 {
-  "dialogue_1": "Great! More batteries.",
-  "dialogue_2": "Yeah, this is the way! I'll be safe...",
+   
   "dialogue_3": "Almost done, I'm quite sure I'm almost there...",
   "dialogue_4": "We are on the right track. Proceed north.",
-  "dialogue_5": "Are we sure this is the correct direction? I should be heading north..",
- 
-  "dialogue_12": "Umpf...[coordinates] 64.201618 and -149.492362...Proceed north and don't stop. Let's get out of here!",
-  "dialogue_13": "Great! Some batteries. No light and they will kill me...",
-
-  "dialogue_20": "What the hell happened here...They left no corpses... Damned monsters...",
+  
+  "dialogue_12": "You! Damn monsters stay away!",
+  "dialogue_13": "Great! Some batteries... No light and they will kill me..."
   
   }
