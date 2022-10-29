@@ -29,6 +29,8 @@ inline godot::Vector2 intersectionPoint(godot::Vector2 v1_0, godot::Vector2 v1_1
   return v2_0 + d2;
 }
 
+static constexpr float PI = 3.1415926536f;
+template <typename T> inline constexpr T deg2rad(T x) { return x * PI / 360; }
 template <typename T> inline constexpr T flip(T x) { return 1 - x; }
 template <typename T> inline constexpr T flip2(T x) { return flip(x) * flip(x); }
 template <typename T> inline constexpr T flip3(T x) { return flip(x) * flip2(x); }
