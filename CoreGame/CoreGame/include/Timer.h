@@ -16,7 +16,7 @@ namespace KCE {
 
 class InterruptableSleeper {
   std::timed_mutex mut_;
-  std::atomic_bool lockedByCreator_ = false; // track whether the mutex is locked
+  std::atomic<bool> lockedByCreator_ = false; // track whether the mutex is locked
   void lock() {                      // lock mutex
     mut_.lock();
     lockedByCreator_ = true;
