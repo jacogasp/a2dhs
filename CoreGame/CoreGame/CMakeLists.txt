@@ -1,7 +1,7 @@
 project(CoreGame CXX)
-set(targetname "CoreGame")
+set(target "CoreGame")
 add_library(
-        ${targetname} SHARED
+        ${target} SHARED
         src/GodotLibrary.cpp
         include/Controller.h src/Controller.cpp
         include/Player.h src/Player.cpp
@@ -16,23 +16,25 @@ add_library(
         include/VisibilityPolygon.h src/VisibilityPolygon.cpp
         include/Timer.h)
 
-target_link_libraries(CoreGame PUBLIC godot-cpp)
-set(COMPILE_OPTIONS )
+target_link_libraries(${target} PUBLIC godot-cpp)
 
 message(STATUS "Build dir: ${BUILD_DIR}")
-set_target_properties(${targetname} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG "${BUILD_DIR}")
-set_target_properties(${targetname} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
-set_target_properties(${targetname} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${BUILD_DIR}")
-set_target_properties(${targetname} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
+set_target_properties(${target} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG "${BUILD_DIR}")
+set_target_properties(${target} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
+set_target_properties(${target} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${BUILD_DIR}")
+set_target_properties(${target} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE "${BUILD_DIR}")
 target_compile_options(
-        ${targetname} PRIVATE
+        ${target} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/W4>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall>
         $<$<CONFIG:DEBUG>:-DDEBUG>
 )
+if (UNIX AND NOT APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+endif()
 
 target_include_directories(
-        ${targetname} PUBLIC
+        ${target} PUBLIC
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         PRIVATE
@@ -40,8 +42,8 @@ target_include_directories(
 )
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND APPLE)
-export(TARGETS ${targetname} godot-cpp NAMESPACE CoreGame:: FILE /usr/local/lib/CoreGameConfig.cmake)
-install(TARGETS ${targetname} godot-cpp)
+export(TARGETS ${target} godot-cpp NAMESPACE CoreGame:: FILE /usr/local/lib/CoreGameConfig.cmake)
+install(TARGETS ${target} godot-cpp)
 endif()
 
 ## Tests
