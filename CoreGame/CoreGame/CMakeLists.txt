@@ -39,8 +39,10 @@ target_include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND APPLE)
 export(TARGETS ${targetname} godot-cpp NAMESPACE CoreGame:: FILE /usr/local/lib/CoreGameConfig.cmake)
 install(TARGETS ${targetname} godot-cpp)
+endif()
 
 ## Tests
 add_subdirectory(tests)
