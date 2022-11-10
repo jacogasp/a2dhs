@@ -6,6 +6,7 @@
 #define COREGAME_TIMER_H
 
 #include <algorithm>
+#include <atomic>
 #include <chrono>
 #include <condition_variable>
 #include <iostream>
